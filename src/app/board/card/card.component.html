@@ -1,2 +1,15 @@
 {{ item }}
-<button (click)="onEdit()">Edit</button>
+<div *ngIf="isEdit">
+  <input
+    type="text"
+    name=""
+    id="input"
+    class="form-control"
+    [(ngModel)]="item"
+    required="required"
+    pattern=""
+  />
+</div>
+<button class="btn btn-success" (click)="onEdit()" [disabled]="item.length === 0">
+  {{ isEdit ? "Save" : "Edit" }}
+</button>
