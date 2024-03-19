@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Board } from '../board.model';
 import { List } from '../list.model';
+import { BoardService } from '../service/board.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -8,28 +9,14 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
-export class BoardComponent {
-  constructor() { }
+export class BoardComponent implements OnInit {
+  board: Board ;
 
-  board: Board = new Board('Test Board', [
-    new List('To do', [
-      'Get to work',
-      'Pick up groceries',
-      'Go home',
-      'Fall asleep'
-    ]),
-    new List('In progress', [
-      'Finishing project'
-    ]),
-    new List('Done', [
-      'Created a recipe app',
-      'Angular Course'
-    ])
-  ]);
-
+  constructor(private boardService:BoardService ){}
   ngOnInit() {
+    this.board=this.boardService.getBoard();
   }
-
+  
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);

@@ -19,12 +19,14 @@
             {{ list.name }}
           </div>
 
-          <div class="tasks-container"
-          cdkDropList
-          [cdkDropListData]="list.tasks"
-          (cdkDropListDropped)="drop($event)">
+          <div
+            class="tasks-container"
+            cdkDropList
+            [cdkDropListData]="list.tasks"
+            (cdkDropListDropped)="drop($event)"
+          >
             <div class="task" *ngFor="let item of list.tasks" cdkDrag>
-              {{ item }}
+             <app-card [item]="item"></app-card>
             </div>
           </div>
         </div>
