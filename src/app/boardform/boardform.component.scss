@@ -1,0 +1,63 @@
+.container {
+    background-image: url('https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?cs=srgb&dl=pexels-pixabay-36717.jpg&fm=jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    font-family: cursive;
+}
+
+.form-control {
+    background-color: rgba(0, 123, 255, 0.3);
+    color: #fff;
+    border-color: #555;
+}
+
+.btn {
+    background-color: rgba(0, 123, 255, 0.0);
+    color: #fff;
+    border-color: #007bff;
+}
+
+.card {
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.col-xs-12 {
+    max-width: 400px;
+}
+
+button[type="submit"] {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #fff;
+    border-color: #6c757d;
+    font-size: 16px;
+    padding: 10px 20px;
+    display: block;
+    margin: 20px auto 0;
+    width: 200px;
+    border-radius: 5px;
+}
+
+button[type="submit"]:hover {
+    background-color: rgba(76, 175, 80, 0.7);
+    border-color: #5a6268;
+}

@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm.value)">
+          <div class="form-group">
+            <label for="board">Board Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="board"
+              required
+              ngModel
+              name="board"
+            />
+          </div>
+          <div *ngFor="let list of lists; let i = index" class="form-group">
+            <label for="list{{i}}">List Name {{i+1}}</label>
+            <div class="input-group">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="list{{i}}"
+                    required
+                    [ngModel]="lists[i]"
+                    (blur)="updateList($event.target.value, i)"
+                    name="list{{i}}"
+                    [disabled]="!isEditing[i]" 
+                    />
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" (click)="toggleEdit(i)">
+                        <span *ngIf="!isEditing[i]">Edit</span> 
+                        <span *ngIf="isEditing[i]">Save</span> 
+                    </button>
+                </div>
+            </div>
+            <div class="card-group">
+              <div *ngFor="let card of cards[i]; let j = index" class="card">
+                <textarea
+                class="form-control"
+                id="card{{i}}-{{j}}"
+                required
+                [ngModel]="cards[i][j]"
+                (blur)="updateCard($event.target.value, i, j)"
+                name="card{{i}}-{{j}}"
+                ></textarea>
+                <button type="button" class="btn btn-danger" (click)="removeCard(i, j)">Remove Card</button>
+              </div>
+              <button type="button" class="btn btn-success" (click)="addCard(i)">Add Card</button>
+            </div>
+            <button type="button" class="btn btn-danger" (click)="removeList(i)">Remove List</button>
+          </div>
+          <button type="button" class="btn btn-success" (click)="addList()">Add List</button>
+          
+          <div ><button class="btn btn-primary" type="submit">Send Board</button></div>
+          
+        </form>
+      </div>
+    </div>
+  </div>

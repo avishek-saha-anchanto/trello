@@ -138,4 +138,13 @@
   transition: transform 400ms cubic-bezier(0, 0, 0.2, 1);
 }
 
+.small-box {
+  display: flexbox;
+  justify-content: center;
+  padding: 5px;
+  background-color:white;
+  color: black;
+  font-size: 10px;
+}
+
 
