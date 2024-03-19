@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'trello-clone'`, () => {
+  it(`should have as title 'trello-clone2'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('trello-clone');
+    expect(app.title).toEqual('trello-clone2');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, trello-clone');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, trello-clone2');
   });
 });

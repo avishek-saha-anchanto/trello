@@ -1,14 +1,31 @@
-<div class="d-flex justify-content-around">
-<div class="list">
-    <h4>Ideas</h4>
-    <app-list></app-list>
-</div>
-<div class="list">
-    <h4>Pending</h4>
-    <app-list></app-list>
-</div>
-<div class="list">
-    <h4>Done</h4>
-    <app-list></app-list>
-</div>
+<div class="root">
+  <div>
+    <div>
+      <div>
+        <h1>Trello</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="board">
+    <div class="board-bar">
+      <p class="board-name">{{ board.name }}</p>
+    </div>
+
+    <div class="board-wrapper">
+      <div class="board-lists">
+        <div class="board-list" *ngFor="let list of board.lists">
+          <div class="list-title">
+            {{ list.name }}
+          </div>
+
+          <div class="tasks-container">
+            <div class="task" *ngFor="let item of list.tasks">
+              {{ item }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
