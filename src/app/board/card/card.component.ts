@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { BoardService } from '../../service/board.service';
 
 @Component({
   selector: 'app-card',
@@ -7,7 +8,17 @@ import { Component, Input } from '@angular/core';
 })
 export class CardComponent {
   @Input() item: string;
+  @Input() index:number;
+  @Input() listName:string;
+  isEdit: boolean = false;
+
+  constructor(private boardService:BoardService){}
   onEdit() {
-    this.item = 'newName';
+    this.isEdit = !this.isEdit;
+  }
+  onSave()
+  {
+    this.isEdit = !this.isEdit;
+    this.boardService.editTaskName(this.index,this.item,this.listName);
   }
 }

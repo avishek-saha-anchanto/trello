@@ -6,6 +6,7 @@ import { BoardComponent } from './board/board.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { CardComponent } from './board/card/card.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import { CardComponent } from './board/card/card.component';
     CardComponent
   ],
   imports: [
-    BrowserModule,DragDropModule
+    BrowserModule,DragDropModule, FormsModule 
   ],
   providers: [
     provideClientHydration(),

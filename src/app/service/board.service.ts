@@ -17,21 +17,26 @@ export class BoardService {
     new List('Done', ['Created a recipe app', 'Angular Course']),
   ]);
 
-//     constructor() {
-//         const boardJSON = JSON.stringify(this.board);
-//         localStorage.setItem('board', boardJSON);
+  //     constructor() {
+  //         const boardJSON = JSON.stringify(this.board);
+  //         localStorage.setItem('board', boardJSON);
 
-//     const storedBoard = localStorage.getItem('board');
-//     if (storedBoard) {
-//       // Parse the stored board JSON string and assign it to the board property
-//       this.board = JSON.parse(storedBoard);
-//     } else {
-//       // If no board is found in local storage, initialize a new board
-//       this.board = new Board('Default Board', []);
-//     }
-  
-//   }
+  //     const storedBoard = localStorage.getItem('board');
+  //     if (storedBoard) {
+  //       // Parse the stored board JSON string and assign it to the board property
+  //       this.board = JSON.parse(storedBoard);
+  //     } else {
+  //       // If no board is found in local storage, initialize a new board
+  //       this.board = new Board('Default Board', []);
+  //     }
+
+  //   }
   getBoard() {
     return this.board;
+  }
+  editTaskName(index: number, newName: string, listName: string) {
+    let listIndex = this.board.lists.findIndex((list) => list.name === listName);
+    let list = this.board.lists[listIndex];
+    list.tasks[index] = newName;
   }
 }

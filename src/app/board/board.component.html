@@ -25,8 +25,8 @@
             [cdkDropListData]="list.tasks"
             (cdkDropListDropped)="drop($event)"
           >
-            <div class="task" *ngFor="let item of list.tasks" cdkDrag>
-             <app-card [item]="item"></app-card>
+            <div class="task" *ngFor="let item of list.tasks;let i = index; " cdkDrag>
+             <app-card [item]="item" [index]="i" [listName]="list.name"></app-card>
             </div>
           </div>
         </div>
