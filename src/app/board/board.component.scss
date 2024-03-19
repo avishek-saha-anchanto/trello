@@ -1,9 +1,14 @@
+
+
+
 .navbar {
   background-color: #0079BF; 
   color: #FFFFFF; 
   padding: 10px;
   border-radius: 20px;
   text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
 }
 
 
@@ -15,13 +20,17 @@
 
 
 .board {
-  margin: 20px auto;
-  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+  min-height: 0;
   background-color: #2c3e50; 
-  border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  margin: auto;
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 20px;
+  
 }
 
 
@@ -30,6 +39,7 @@
   color: #FFFFFF; 
   padding: 10px;
   text-align: center;
+  border-radius: 20px;
 }
 
 
@@ -41,7 +51,8 @@
 
 .board-wrapper {
   display: flex;
-  justify-content: space-between;
+  flex-grow: 1;
+  overflow-x: auto;
   padding: 20px;
 }
 
@@ -56,34 +67,55 @@
 .board-list {
   flex-grow: 1;
   border: 1px solid #4a627a; 
-  border-radius: 5px;
+  border-radius: 20px;
+
 }
 
 /* List title */
 .list-title {
   background-color: #34495e; 
   color: #FFFFFF; 
-  padding: 10px;
-  font-weight: bold;
-  border-bottom: 1px solid #4a627a; 
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-basis: 0; // to force the columns to all be the same size, regardless of content
+
+  min-width: 300px;
+  margin: 50px;
+  padding: 25px;
+
+  border-radius: 20px;
+
+  
+  &:not(:first-child) {
+    margin-left: 0;
+    }
+
+  .column-title {
+      font-size: 25px;
+      font-weight: 800;
+      font-family: 'Lato', sans-serif;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      }
 }
 
 /* Tasks container */
 .tasks-container {
-  display: flex;
-  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: auto;
   gap: 10px;
   padding: 10px;
 }
 
 /* Task */
 .task {
+  display: flex;
   background-color: #4a627a; 
   color: #FFFFFF; 
   padding: 5px 10px;
-  border-radius: 3px;
+  margin: 10px;
+  border-radius: 20px;
 }
 
 .cdk-drag-preview {
@@ -99,11 +131,11 @@
 }
 
 .cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 .tasks-container.cdk-drop-list-dragging .task:not(.cdk-drag-placeholder) {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 400ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 
