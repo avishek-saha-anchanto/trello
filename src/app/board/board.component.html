@@ -1,5 +1,5 @@
 <div class="root">
-  <div>
+  <div class="navbar">
     <div>
       <div>
         <h1>Trello</h1>
@@ -13,15 +13,20 @@
     </div>
 
     <div class="board-wrapper">
-      <div class="board-lists">
+      <div class="board-lists" cdkDropListGroup>
         <div class="board-list" *ngFor="let list of board.lists">
           <div class="list-title">
             {{ list.name }}
           </div>
 
-          <div class="tasks-container">
-            <div class="task" *ngFor="let item of list.tasks">
-              {{ item }}
+          <div
+            class="tasks-container"
+            cdkDropList
+            [cdkDropListData]="list.tasks"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <div class="task" *ngFor="let item of list.tasks" cdkDrag>
+             <app-card [item]="item"></app-card>
             </div>
           </div>
         </div>
