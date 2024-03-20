@@ -23,17 +23,16 @@
             />
           </svg>
         </button>
-
         <div
-          style="background-color: #7e6f97"
-          class="offcanvas offcanvas-start"
-          data-bs-scroll="true"
-          tabindex="-1"
-          id="offcanvasWithBothOptions"
-          aria-labelledby="offcanvasWithBothOptionsLabel"
+        style="background-color:#263646"
+        class="offcanvas offcanvas-start"
+        data-bs-scroll="true"
+        tabindex="-1"
+        id="offcanvasWithBothOptions"
+        aria-labelledby="offcanvasWithBothOptionsLabel"
         >
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel" style="color: white; font-size: 24px; text-align: center;">
               Trello
             </h5>
             <button
@@ -43,11 +42,26 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="offcanvas-body">
-            <div *ngFor="let board of boards">
-              {{ board }}
+          <div class="offcanvas-body" style="color: white; font-size: 15px; padding: 5px; text-align: center;">
+
+          <div *ngIf="showBoardsFlag" style="padding: 10px;">
+          <!-- Display the "Close Boards" button when showBoardsFlag is true -->
+          <button type="button" class="btn btn-danger" (click)="showBoards()">Close Boards</button>
+          </div>
+          <div *ngIf="!showBoardsFlag" style="padding: 10px;">
+          <!-- Display the "Show Boards" button when showBoardsFlag is false -->
+          <button type="button" class="btn btn-primary" (click)="showBoards()">Show Boards</button>
+          </div>
+          <div style="padding: 10px;">
+            <button type="button" mat-raised-button class="btn btn-success" style="padding: 10px;" (click)="openBoardFormDialog()">Create Board</button>
+          </div>
+            <div *ngIf="showBoardsFlag" style="margin: 10px;">
+              <div *ngFor="let board of boards">
+                {{ board }}
+              </div>
             </div>
           </div>
+          
         </div>
         <h1>Trello</h1>
       </div>
@@ -60,9 +74,6 @@
   <div class="board">
     <div class="board-bar">
       <p class="board-name">{{ board.name }}</p>
-      <button mat-raised-button (click)="openBoardFormDialog()">Create Board</button>
-      
-
     </div>
 
     <div class="board-wrapper">
@@ -98,8 +109,10 @@
                 class="btn btn-success"
                 style="margin-left: 20px"
                 type="button"
-                (click)="addCard(inputField.value, listIndex)"
+                (click)="addCard(inputField.value, listIndex); inputField.value = ''"
               >
+
+
                 Add Card
               </button>
             </div>
