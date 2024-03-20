@@ -20,6 +20,13 @@ export class BoardService {
   getBoard() {
     return this.board;
   }
+
+  addList(newList: List) {
+    this.board.lists.push(newList);
+    console.log(this.board.lists);
+  }
+
+
   editCardName(index: number, newName: string, listName: string) {
     let listIndex = this.board.lists.findIndex((list) => list.name === listName);
     let list = this.board.lists[listIndex];

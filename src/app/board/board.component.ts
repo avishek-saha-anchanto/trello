@@ -11,10 +11,18 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 export class BoardComponent implements OnInit {
   board: Board ;
+  lists : List;
+  newListTitle: string = '';
+
 
   constructor(private boardService:BoardService ){}
   ngOnInit() {
     this.board=this.boardService.getBoard();
+  }
+
+  addListToLists(newListTitle: string) {
+    const newList = new List(newListTitle, []);
+    this.boardService.addList(newList);
   }
   
   drop(event: CdkDragDrop<string[]>) {
