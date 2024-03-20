@@ -1,5 +1,4 @@
-{{ item }}
-<div *ngIf="isEdit">
+<!-- <div *ngIf="isEdit">
   <input
     type="text"
     name=""
@@ -12,4 +11,73 @@
 </div>
 <button class="btn btn-success" (click)="onEdit()" [disabled]="item.length === 0">
   {{ isEdit ? "Save" : "Edit" }}
+</button> -->
+{{ item }}
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#staticBackdrop"
+>
+  Edit
 </button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <input
+            type="text"
+            name=""
+            id="input"
+            class="form-control"
+            [(ngModel)]="newTitle"
+            required="required"
+            placeholder="Title"
+          />
+          <textarea
+            name=""
+            id=""
+            cols="50"
+            rows="5"
+            [(ngModel)]="description"
+            placeholder="Description"
+          ></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="onSave()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
