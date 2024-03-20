@@ -9,6 +9,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
+<<<<<<< Updated upstream
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
@@ -20,6 +21,21 @@ export class BoardComponent implements OnInit {
 
   constructor(private boardService: BoardService, public dialog: MatDialog) { }
 
+=======
+  styleUrl: './board.component.scss',
+})
+export class BoardComponent implements OnInit {
+  boards=["Intern","my project","Test"];
+  board: Board;
+  lists: List;
+  newListTitle: string = '';
+  isAdd: boolean = false;
+  showModal: boolean = false;
+  @ViewChild('inputField') inputField: ElementRef;
+  cardName: string;
+  addingToListIndex: number = -1;
+  constructor(private boardService: BoardService,public dialog: MatDialog) {}
+>>>>>>> Stashed changes
   ngOnInit() {
     this.board = this.boardService.getBoard();
   }
@@ -49,5 +65,24 @@ export class BoardComponent implements OnInit {
   closeModal(): void {
     // Implement the logic to close the modal here
     this.showModal = false;
+<<<<<<< Updated upstream
+=======
+  }
+  
+  
+    addCard(cardName: string, listIndex: number) {
+    if(cardName.length==0)
+    return;
+    if (this.isAdd && this.addingToListIndex === listIndex) {
+      this.isAdd = false;
+      this.addingToListIndex = -1;
+    } else {
+      this.addingToListIndex = listIndex;
+      this.isAdd = !this.isAdd;
+    }
+    this.boardService.addCardOnBoard(listIndex, cardName);
+    this.inputField.nativeElement.value = '';
+>>>>>>> Stashed changes
   }
 }
+
