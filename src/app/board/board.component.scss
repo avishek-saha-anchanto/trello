@@ -98,6 +98,14 @@
   border-radius: 20px;
 }
 
+.offcanvas {
+  z-index: 4000; /* Adjust this value as needed */
+}
+
+.dialog-container {
+  z-index: 5100; /* Higher value than the offcanvas sidebar */
+}
+
 
 
 
