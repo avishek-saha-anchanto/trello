@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'boardform',
@@ -9,6 +10,12 @@ export class BoardformComponent {
   lists: string[] = [];
   cards: string[][] = [];
   isEditing: boolean[] = [];
+
+  constructor(public dialogRef: MatDialogRef<BoardformComponent>) { }
+
+  closeModal(): void {
+    this.dialogRef.close(); 
+  }
   
   toggleEdit(index: number) {
     this.isEditing[index] = !this.isEditing[index];

@@ -1,63 +1,119 @@
 .container {
-    background-image: url('https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?cs=srgb&dl=pexels-pixabay-36717.jpg&fm=jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-color: #34495e;
     color: #fff;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.form-group {
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    color: #aaa;
+    font-size: 30px;
+  }
+  
+  .close-btn:hover {
+    color: #fff;
+  }
+  
+  .form-group {
     margin-bottom: 20px;
-    font-family: cursive;
-}
-
-.form-control {
+  }
+  
+  .form-control {
     background-color: rgba(0, 123, 255, 0.3);
     color: #fff;
     border-color: #555;
-}
-
-.btn {
+  }
+  
+  .btn_p {
     background-color: rgba(0, 123, 255, 0.0);
     color: #fff;
-    border-color: #007bff;
-}
-
-.card {
-    margin-bottom: 10px;
-}
-
-input[type="text"],
-textarea {
-    width: 100%;
-}
-
-.row {
-    display: flex;
-    justify-content: center;
-}
-
-.col-xs-12 {
-    max-width: 400px;
-}
-
-button[type="submit"] {
-    background-color: rgba(76, 175, 80, 0.2);
+    border-color: #1eff00c2;
+    padding: 10px;
+    margin: 4px;
+  }
+  
+  .btn1 {
+    background-color: rgba(0, 123, 255, 0.0);
+    color:white;
+    border-color: #ff3c00e0;
+    padding: 10px;
+    margin: 4px;
+  }
+  
+  .btn2 {
+    background-color: rgba(0, 123, 255, 0.0);
     color: #fff;
-    border-color: #6c757d;
-    font-size: 16px;
-    padding: 10px 20px;
-    display: block;
-    margin: 20px auto 0;
-    width: 200px;
-    border-radius: 5px;
-}
+    border-color: #1eff00c2;
+    padding: 10px;
+    margin: 4px;
+  }
 
-button[type="submit"]:hover {
-    background-color: rgba(76, 175, 80, 0.7);
-    border-color: #5a6268;
-}
+    .btn3{
+    background-color: #34495e;
+    color:white;
+    border-color: #ff3c00e0;
+    padding: 10px;
+    margin: 2px;
+
+    }
+  
+  
+
+  .input_group{
+    margin: 4px;
+    padding: 5px;
+    border-radius: 4px;
+
+  }
+
+  .input_group_append{
+    margin: 4px;
+    padding: 5px;
+    border-radius: 4px;
+
+  }
+
+  .card-group {
+    display: flex;
+    flex-direction: column;
+    padding:10px ;
+  }
+  
+  .card {
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 4px;
+    color: black;
+    background-color:#34495e;
+  }
+  
+  .card textarea {
+    background-color: rgba(0, 123, 255, 0.3); /* Match the background color of adding a list */
+    color:white;
+    border: 1px solid #555; /* Match the border color of adding a list */
+    padding: 5px;
+    border-radius: 4px;
+    resize: vertical; /* Allow vertical resizing of textarea */
+  }
+  
+  .card textarea:focus {
+    outline: none; /* Remove outline on focus */
+    border-color: #007bff; /* Change border color on focus */
+  }
+
+  .form-control:focus {
+    outline: none; /* Remove outline on focus */
+    border-color: #007bff; /* Change border color on focus */
+  }
+
+  
+
+  
+
+
+  

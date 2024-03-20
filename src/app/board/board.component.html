@@ -7,9 +7,14 @@
     </div>
   </div>
 
+  
+
+
   <div class="board">
     <div class="board-bar">
-      <p class="board-name">{{ board.name }} &nbsp; &nbsp;<a routerLink="/boardform"><span class="small-box">Create Board</span></a></p>
+      <p class="board-name">{{ board.name }}</p>
+      <button mat-raised-button (click)="openBoardFormDialog()">Create Board</button>
+      
 
     </div>
 
