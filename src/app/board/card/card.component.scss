@@ -1,0 +1,22 @@
+svg {
+  cursor: pointer;
+}
+.modal-header {
+  background-color: rgb(152, 215, 246);
+  color: black;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.modal-body {
+  background-color: rgb(196, 239, 225);
+  input {
+    background-color: rgb(219, 216, 216);
+    margin: 4px 0px;
+  }
+  textarea {
+    background-color: rgb(219, 216, 216);
+    margin: 4px 0px;
+  }
+}
+.modal-footer {
+  background-color: rgb(255, 232, 232);
+}

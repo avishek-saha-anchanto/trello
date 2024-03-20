@@ -1,7 +1,54 @@
 <div class="root">
   <div class="navbar">
     <div>
-      <div>
+      <div class="d-flex align-items-center">
+        <button
+          class="btn btn-primary"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasWithBothOptions"
+          aria-controls="offcanvasWithBothOptions"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-list"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+            />
+          </svg>
+        </button>
+
+        <div
+          style="background-color: #7e6f97"
+          class="offcanvas offcanvas-start"
+          data-bs-scroll="true"
+          tabindex="-1"
+          id="offcanvasWithBothOptions"
+          aria-labelledby="offcanvasWithBothOptionsLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+              Trello
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <div *ngFor="let board of boards">
+              {{ board }}
+            </div>
+          </div>
+        </div>
         <h1>Trello</h1>
       </div>
     </div>
@@ -9,13 +56,20 @@
 
   <div class="board">
     <div class="board-bar">
-      <p class="board-name">{{ board.name }} &nbsp; &nbsp;<a routerLink="/boardform"><span class="small-box">Create Board</span></a></p>
-
+      <p class="board-name">
+        {{ board.name }} &nbsp; &nbsp;
+        <a routerLink="/boardform"
+          ><span class="small-box">Create Board</span></a
+        >
+      </p>
     </div>
 
     <div class="board-wrapper">
       <div class="board-lists" cdkDropListGroup>
-        <div class="board-list" *ngFor="let list of board.lists">
+        <div
+          class="board-list"
+          *ngFor="let list of board.lists; let listIndex = index"
+        >
           <div class="list-title">
             {{ list.name }}
           </div>
@@ -26,8 +80,27 @@
             [cdkDropListData]="list.tasks"
             (cdkDropListDropped)="drop($event)"
           >
-            <div class="task" *ngFor="let item of list.tasks" cdkDrag>
-             <app-card [item]="item"></app-card>
+            <div
+              class="task"
+              *ngFor="let item of list.tasks; let itemIndex = index"
+              cdkDrag
+            >
+              <app-card
+                [item]="item.name"
+                [index]="itemIndex"
+                [listName]="list.name"
+              ></app-card>
+            </div>
+            <div class="tasks-container">
+              <input type="text" #inputField />
+              <button
+                class="btn btn-success"
+                style="margin-left: 20px"
+                type="button"
+                (click)="addCard(inputField.value, listIndex)"
+              >
+                Add Card
+              </button>
             </div>
           </div>
         </div>
