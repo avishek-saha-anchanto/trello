@@ -2,45 +2,31 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Board } from '../board.model';
 import { List } from '../list.model';
 import { BoardService } from '../service/board.service';
-<<<<<<< HEAD
 import { MatDialog } from '@angular/material/dialog';
 import { BoardformComponent } from '../boardform/boardform.component';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-=======
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
->>>>>>> e9a051fc17b415f8e9f3cbaa12d5c947169cc2d6
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-<<<<<<< HEAD
+
   styleUrls: ['./board.component.scss']
 })
-export class BoardComponent implements OnInit {
-  board: Board;
-  lists: List;
-  newListTitle: string = '';
-  isSidebarCollapsed: boolean = false;
-  showModal: boolean = false; // Add this property to control the modal visibility
 
-  constructor(private boardService: BoardService, public dialog: MatDialog) { }
-
-=======
-  styleUrl: './board.component.scss',
-})
 export class BoardComponent implements OnInit {
+  
   boards=["Intern","my project","Test"];
   board: Board;
   isAdd: boolean = false;
+  lists: List;
+  newListTitle: string = '';
   @ViewChild('inputField') inputField: ElementRef;
   cardName: string;
   addingToListIndex: number = -1;
-  constructor(private boardService: BoardService) {}
->>>>>>> e9a051fc17b415f8e9f3cbaa12d5c947169cc2d6
+  showModal: boolean=false;
+  
+  constructor(private boardService: BoardService,public dialog: MatDialog) {}
+
   ngOnInit() {
     this.board = this.boardService.getBoard();
   }
@@ -52,22 +38,16 @@ export class BoardComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(
-        event.previousContainer.data,
+      transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex
-      );
+        event.currentIndex);
     }
   }
 
-<<<<<<< HEAD
+
   openBoardFormDialog(): void {
     const dialogRef = this.dialog.open(BoardformComponent, {
       width: '400px'
@@ -75,9 +55,10 @@ export class BoardComponent implements OnInit {
   }
 
   closeModal(): void {
-    // Implement the logic to close the modal here
+    
     this.showModal = false;
-=======
+  }
+
   addCard(cardName: string, listIndex: number) {
     if(cardName.length==0)
     return;
@@ -90,6 +71,7 @@ export class BoardComponent implements OnInit {
     }
     this.boardService.addCardOnBoard(listIndex, cardName);
     this.inputField.nativeElement.value = '';
->>>>>>> e9a051fc17b415f8e9f3cbaa12d5c947169cc2d6
+
   }
 }
+
