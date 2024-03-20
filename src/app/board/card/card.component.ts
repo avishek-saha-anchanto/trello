@@ -8,17 +8,17 @@ import { BoardService } from '../../service/board.service';
 })
 export class CardComponent {
   @Input() item: string;
-  @Input() index:number;
-  @Input() listName:string;
-  isEdit: boolean = false;
+  @Input() index: number;
+  @Input() listName: string;
 
-  constructor(private boardService:BoardService){}
-  onEdit() {
-    this.isEdit = !this.isEdit;
-  }
-  onSave()
-  {
-    this.isEdit = !this.isEdit;
-    this.boardService.editCardName(this.index,this.item,this.listName);
+  newTitle: string = '';
+  description: string = '';
+
+  constructor(private boardService: BoardService) {}
+
+  onSave() {
+    this.boardService.editCardName(this.index, this.newTitle, this.listName);
+    console.log(this.listName);
+    console.log(this.index);
   }
 }
