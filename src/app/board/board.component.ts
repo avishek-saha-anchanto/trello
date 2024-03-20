@@ -24,7 +24,7 @@ export class BoardComponent implements OnInit {
   ngOnInit() {
     this.board = this.boardService.getBoard();
   }
-
+  
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -46,12 +46,6 @@ export class BoardComponent implements OnInit {
     if(cardName.length==0)
     return;
     if (this.isAdd && this.addingToListIndex === listIndex) {
-      // console.log(
-      //   'Adding card to list:',
-      //   listIndex,
-      //   'with title:',
-      //   this.cardTitle
-      // );
       this.isAdd = false;
       this.addingToListIndex = -1;
     } else {
