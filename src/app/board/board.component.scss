@@ -1,7 +1,7 @@
 .navbar {
   background-color: #0079bf;
   color: #ffffff;
-  padding: 10px;
+  padding: 2px;
   border-radius: 20px;
   text-align: center;
   font-family: Georgia, "Times New Roman", Times, serif;
@@ -10,6 +10,14 @@
   h1 {
     font-size: 24px;
     font-weight: bold;
+    margin-top: 15px;
+  }
+  #offcanvas-btn {
+    background-color: #0079bf;
+    border: 0px;
+  }
+  .offcanvas {
+    width: 200px;
   }
 }
 
@@ -19,24 +27,23 @@
   flex-grow: 1;
   min-width: 0;
   min-height: 0;
-  background-color: #2c3e50; 
+  background-color: #2c3e50;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
   border-radius: 20px;
   margin-top: 20px;
-  
+
   .board-bar {
-    background-color: #34495e; 
-    color: #FFFFFF; 
+    background-color: #34495e;
+    color: #ffffff;
     padding: 10px;
     text-align: center;
     border-radius: 20px;
-    
+
     .board-name {
+      margin: 4px 0px;
       font-size: 24px;
       font-weight: bold;
     }
-    
   }
 
   .board-wrapper {
@@ -44,34 +51,34 @@
     flex-grow: 1;
     overflow-x: auto;
     padding: 20px;
-  
+
     .board-lists {
       display: flex;
       flex-grow: 1;
       gap: 20px;
     }
-  
+
     .board-list {
       flex-grow: 1;
-      border: 1px solid #4a627a; 
+      border: 1px solid #4a627a;
       border-radius: 20px;
 
       .list-title {
-        background-color: #34495e; 
-        color: #FFFFFF; 
+        background-color: #34495e;
+        color: #ffffff;
         display: flex;
         flex-direction: column;
         flex-grow: 1;
-        flex-basis: 0; 
+        flex-basis: 0;
         min-width: 300px;
-        margin: 50px;
-        padding: 25px;
+        margin: 15px;
+        padding: 20px;
         border-radius: 20px;
-      
+        
         .column-title {
           font-size: 25px;
           font-weight: 800;
-          font-family: 'Lato', sans-serif;
+          font-family: "Lato", sans-serif;
           text-transform: uppercase;
           margin-bottom: 20px;
         }
@@ -85,14 +92,12 @@
   overflow-y: auto;
   gap: 10px;
   padding: 10px;
-  
-  
 }
 
 .task {
   display: flex;
-  background-color: #4a627a; 
-  color: #FFFFFF; 
+  background-color: #4a627a;
+  color: #ffffff;
   padding: 5px 10px;
   margin: 10px;
   border-radius: 20px;
@@ -106,31 +111,22 @@
   z-index: 5100; /* Higher value than the offcanvas sidebar */
 }
 
-
-
-
-
-
-
-
-
-
 .form-container {
   margin-top: 20px;
   padding: 20px;
-  background-color: #2c3e50; 
+  background-color: #2c3e50;
   border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   .inputbox {
-    background-color: #34495e; 
-    border-radius: 20px; 
-    color: white; 
-    padding: 10px; 
+    background-color: #34495e;
+    border-radius: 20px;
+    color: white;
+    padding: 10px;
   }
 
   input::placeholder {
-    color: white; 
+    color: white;
     padding: 10px;
   }
 }
@@ -139,8 +135,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #34495e; 
-  color: #FFFFFF; 
+  background-color: #34495e;
+  color: #ffffff;
   padding: 10px 20px;
   border: none;
   border-radius: 20px;
@@ -152,11 +148,6 @@
     background-color: #2c3e50;
   }
 }
-
-
-
-
-
 
 .cdk-drag-preview {
   box-sizing: border-box;

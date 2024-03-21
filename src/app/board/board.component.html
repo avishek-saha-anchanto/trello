@@ -4,6 +4,7 @@
       <div class="d-flex align-items-center">
         <button
           class="btn btn-primary"
+          id="offcanvas-btn"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasWithBothOptions"
@@ -35,13 +36,18 @@
             <h5
               class="offcanvas-title"
               id="offcanvasWithBothOptionsLabel"
-              style="color: white; font-size: 24px; text-align: center"
+              style="
+                color: white;
+                font-size: 24px;
+                text-align: center;
+                margin-top: 15px;
+              "
             >
               Trello
             </h5>
             <button
               type="button"
-              class="btn-close"
+              class="btn-close btn btn-light"
               data-bs-dismiss="offcanvas"
               aria-label="Close"
             ></button>
@@ -88,7 +94,9 @@
             </div>
             <div *ngIf="showBoardsFlag" style="margin: 10px">
               <div *ngFor="let board of boards">
-                {{ board }}
+                <a [routerLink]="['/', board]" (click)="closeSidebar()">{{
+                  board
+                }}</a>
               </div>
             </div>
           </div>
@@ -109,7 +117,8 @@
           class="board-list"
           *ngFor="let list of board.lists; let listIndex = index"
         >
-          <div class="list-title">
+          <div class="list-title" style="text-align:center;"
+          >
             {{ list.name }}
           </div>
 
@@ -127,6 +136,7 @@
               <app-card
                 [card]="item"
                 [index]="itemIndex"
+                [listIndex]="listIndex"
                 [listName]="list.name"
               ></app-card>
             </div>

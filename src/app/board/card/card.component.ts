@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BoardService } from '../../service/board.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Card } from '../../card.model';
@@ -8,10 +8,11 @@ import { Card } from '../../card.model';
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
 })
-export class CardComponent {
-  @Input() card:Card;
+export class CardComponent implements OnInit {
+  @Input() card: Card;
   @Input() index: number;
   @Input() listName: string;
+  @Input() listIndex: number;
 
   newTitle: string = '';
   description: string = '';
@@ -21,18 +22,29 @@ export class CardComponent {
     private router: Router,
     private route: ActivatedRoute
   ) {}
-
+  ngOnInit(): void {}
   onSaveEdit() {
-    this.boardService.editCardName(this.index, this.newTitle,this.description, this.listName);
-    console.log(this.listName);
-    console.log(this.index);
+    this.boardService.editCardName(
+      this.index,
+      this.newTitle,
+      this.description,
+      this.listName
+    );
+    this.newTitle='';
+    this.description='';
+  }
+  openModalCardEdit() {
+    this.router.navigate(['edit', this.listName, this.index], {
+      relativeTo: this.route,
+    });
   }
   openModalCardDetail() {
-    this.router.navigate(['detail'], { relativeTo: this.route });
-    //this.card=this.boardService.getCard(this.index,this.listName);
+    this.router.navigate(['detail', this.listName, this.index], {
+      relativeTo: this.route,
+    });
+    console.log(this.card);
   }
   closeModalCardDetail() {
-    this.router.navigate(['/'], { relativeTo: this.route });
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
-
 }

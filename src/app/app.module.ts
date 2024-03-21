@@ -24,8 +24,9 @@ const appRoutes: Routes = [
   {
     path: 'test',
     component: BoardComponent,
-    children: [{ path: 'detail', component: CardDetailsComponent }],
+    children: [{ path: 'detail/:id/:id', component: CardComponent}],
   },
+  { path: ':boardName', component: BoardComponent },
 ];
 
 @NgModule({

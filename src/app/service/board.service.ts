@@ -37,13 +37,14 @@ export class BoardService {
     list.tasks[index].description = newDescription;
     console.log(list);
   }
-  getCard(index:number,listName:string)
-  {
-    let listIndex = this.board.lists.findIndex(
-      (list) => list.name === listName
-    );
-    let list = this.board.lists[listIndex];
-    return list.tasks[index];
+  getCard(index: number, listIndex: number): Card | undefined {
+    const list = this.board.lists[listIndex];
+    if (list) {
+      return list.tasks[index];
+    } else {
+      console.error(`List at index ${listIndex} not found.`);
+      return undefined;
+    }
   }
   addCardOnBoard(index: number, cardTitle: string) {
     this.board.lists[index].tasks.push(new Card (cardTitle,''));
