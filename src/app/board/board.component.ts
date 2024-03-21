@@ -52,7 +52,7 @@ export class BoardComponent implements OnInit {
 
   addListToLists(newListTitle: string) {
     const newList = new List(newListTitle, []);
-    this.boardService.addList(newList,0);
+    this.boardService.addList(newList,this.bindex);
     this.newListTitle='';
   }
 
