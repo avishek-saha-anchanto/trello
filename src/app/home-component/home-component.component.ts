@@ -9,22 +9,18 @@ import { HttpClient } from '@angular/common/http';
 import { Card } from '../card.model';
 import { map } from 'rxjs';
 import { response } from 'express';
-import { ActivatedRoute } from '@angular/router';
-
-
 
 @Component({
-  selector: 'app-board',
-  templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss']
+  selector: 'app-home-component',
+  templateUrl: './home-component.component.html',
+  styleUrl: './home-component.component.scss'
 })
-export class BoardComponent implements OnInit {
+export class HomeComponent {
   boards:Board[]=[];
   board: Board;
   isAdd: boolean = false;
   lists: List;
   cards:Card;
-  bindex:number
   newListTitle: string = '';
   @ViewChild('inputField') inputField: ElementRef;
   cardName: string;
@@ -33,39 +29,19 @@ export class BoardComponent implements OnInit {
   showModal: boolean=false;
   dialogRef: MatDialogRef<BoardformComponent> | undefined;
 
-  constructor(private boardService: BoardService, public dialog1: MatDialog, private dialog: MatDialog,private http:HttpClient,private route:ActivatedRoute) {}
+  constructor(private boardService: BoardService, public dialog1: MatDialog, private dialog: MatDialog,private http:HttpClient) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      const boardIndex = +params['id']; 
-      this.bindex=boardIndex
-      this.board = this.boardService.getBoardById(boardIndex);
-      console.log(this.board)
-      
-       
-    });
     
+    this.fetchDataFromFirebase();
     
    
     
   }
 
-  addListToLists(newListTitle: string) {
-    const newList = new List(newListTitle, []);
-    this.boardService.addList(newList,0);
-    this.newListTitle='';
-  }
+  
 
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
-    }
-  }
+  
 
   openBoardFormDialog(): void {
     const dialogRef = this.dialog1.open(BoardformComponent, {
@@ -88,20 +64,7 @@ export class BoardComponent implements OnInit {
     this.showModal = false;
   }
 
-  addCard( listIndex: number,cardName: string,bindex:number) {
-    console.log(listIndex)
-    console.log(cardName)
-    console.log(bindex)
-    if (cardName.length == 0) return;
-    if (this.isAdd && this.addingToListIndex === listIndex) {
-      this.isAdd = false;
-      this.addingToListIndex = -1;
-    } else {
-      this.addingToListIndex = listIndex;
-      this.isAdd = !this.isAdd;
-    }
-    this.boardService.addCardOnBoard(cardName,listIndex,bindex);
-  }
+  
 
   // Define a boolean flag to control the visibility of boards
 showBoardsFlag: boolean = false;
@@ -112,6 +75,12 @@ showBoards(){
   this.showBoardsFlag = !this.showBoardsFlag;
 }
 
+clearBoard(){
+  this.boardService.clearBoard();
+}
+
+
+
 fetchDataFromFirebase() {
   
   this.boardService.clearBoard();
@@ -119,7 +88,7 @@ fetchDataFromFirebase() {
   // Make an HTTP GET request to your Firebase Realtime Database URL
   this.http.get<any>('https://trelloclone-219b5-default-rtdb.firebaseio.com/.json')
     .subscribe(data => {
-      console.log(data);
+      
       
       
       for (const Key in data) {
@@ -131,28 +100,40 @@ fetchDataFromFirebase() {
         
         
           
-
+          let j=0;
           for (const listKey in boardData) {
-            if (listKey.startsWith('list')) {
+            var idlist='list'+j
+            
+            
+            for(const listKey in boardData){
+            if (listKey.startsWith(idlist)) {
               
               const listData = boardData[listKey];
               const newList = new List(listData, []);
 
-              for (const taskKey in boardData) {
-                var i=0;
+               // Initialize i outside the loop
+                for (const taskKey in boardData) {
+                var id = 'card' + j;
                 
-                if (taskKey.startsWith('card'+i)) {
+                if (taskKey.startsWith(id)) {
                   const cardData = boardData[taskKey];
-                  
                   const newCard = new Card(cardData, '');
+                  
                   
                   newList.tasks.push(newCard);
                 }
+                 // Increment i inside the loop
               }
               
-              i=i+1;
+              
+              
               newBoard.lists.push(newList);
+              
+              
             }
+            
+          }
+            j++;
           }
           
           var newname=''
@@ -172,6 +153,7 @@ fetchDataFromFirebase() {
           
           this.boardService.addBoard(newBoard);
           
+          
 
         
       }
@@ -182,6 +164,7 @@ fetchDataFromFirebase() {
       
     });
   }
+
 
 
 }

@@ -9,10 +9,16 @@ import { CardComponent } from './board/card/card.component';
 import { BoardformComponent } from './boardform/boardform.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home-component/home-component.component';
+
+
 
 const appRoutes:Routes=[
   {path: 'boardform',component:BoardformComponent},
-  {path:'',component: BoardComponent}
+  {path:'',component: HomeComponent},
+  {path: 'board/:id', component: BoardComponent }
+
 
 ]
 
@@ -21,10 +27,11 @@ const appRoutes:Routes=[
     AppComponent,
     BoardComponent,
     CardComponent,
-    BoardformComponent
+    BoardformComponent,
+    HomeComponent
   ],
   imports: [
-    BrowserModule,DragDropModule,RouterModule.forRoot(appRoutes),FormsModule
+    BrowserModule,DragDropModule,RouterModule.forRoot(appRoutes),FormsModule,HttpClientModule
   ],
   providers: [
     provideClientHydration(),
