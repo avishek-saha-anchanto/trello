@@ -29,7 +29,7 @@ export class HomeComponent {
   showModal: boolean=false;
   dialogRef: MatDialogRef<BoardformComponent> | undefined;
 
-  constructor(private boardService: BoardService, public dialog1: MatDialog, private dialog: MatDialog,private http:HttpClient) {}
+  constructor(private boardService: BoardService, public dialog1: MatDialog, private dialog: MatDialog,private http:HttpClient,private cdr:ChangeDetectorRef) {}
 
   ngOnInit() {
     
@@ -71,6 +71,9 @@ showBoardsFlag: boolean = false;
 
 // Function to toggle the visibility of boards
 showBoards(){
+  console.log(this.boards)
+  // this.fetchDataFromFirebase();
+  
   
   this.showBoardsFlag = !this.showBoardsFlag;
 }
