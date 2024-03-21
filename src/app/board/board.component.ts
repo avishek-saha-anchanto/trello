@@ -101,6 +101,7 @@ export class BoardComponent implements OnInit {
       this.isAdd = !this.isAdd;
     }
     this.boardService.addCardOnBoard(cardName,listIndex,bindex);
+    
   }
 
   // Define a boolean flag to control the visibility of boards
