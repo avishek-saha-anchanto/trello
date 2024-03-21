@@ -4,6 +4,7 @@
       <div class="d-flex align-items-center">
         <button
           class="btn btn-primary"
+          id="offcanvas-btn"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasWithBothOptions"
@@ -32,12 +33,21 @@
           aria-labelledby="offcanvasWithBothOptionsLabel"
         >
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel" style="color: white; font-size: 24px; text-align: center;">
+            <h5
+              class="offcanvas-title"
+              id="offcanvasWithBothOptionsLabel"
+              style="
+                color: white;
+                font-size: 24px;
+                text-align: center;
+                margin-top: 15px;
+              "
+            >
               Trello
             </h5>
             <button
               type="button"
-              class="btn-close"
+              class="btn-close btn btn-light"
               data-bs-dismiss="offcanvas"
               aria-label="Close"
             ></button>
@@ -71,8 +81,9 @@
             
             <div class="task" *ngFor="let item of list?.tasks; let itemIndex = index" cdkDrag>
               <app-card
-                [item]="item.name"
+                [card]="item"
                 [index]="itemIndex"
+                [listIndex]="listIndex"
                 [listName]="list.name"
               ></app-card>
             </div>
@@ -86,8 +97,6 @@
                 type="button"
                 (click)="addCard(listIndex,inputField.value ,bindex); inputField.value = ''"
               >
-
-
                 Add Card
               </button>
             </div>
