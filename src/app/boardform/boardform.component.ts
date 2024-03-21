@@ -93,7 +93,7 @@ fetchDataFromFirebase() {
   
   this.boardService.clearBoard();
   
-  // Make an HTTP GET request to your Firebase Realtime Database URL
+  
   this.http.get<any>('https://trelloclone-219b5-default-rtdb.firebaseio.com/.json')
     .subscribe(data => {
       

@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { BoardService } from '../../service/board.service';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { Card } from '../../card.model';
 
 @Component({
   selector: 'app-card',
@@ -7,18 +10,45 @@ import { BoardService } from '../../service/board.service';
   styleUrl: './card.component.scss',
 })
 export class CardComponent {
-  @Input() item: string;
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const boardIndex = +params['id']; 
+      this.bindex=boardIndex
+      
+      
+       
+    });
+    
+    
+   
+    
+  }
+
+  
+  bindex:number
+
+
+    
+  @Input() item: Card;
   @Input() index: number;
   @Input() listName: string;
+  @Input() listIndex: number;
+  @Input() boardIndex: number;
 
   newTitle: string = '';
   description: string = '';
 
-  constructor(private boardService: BoardService) {}
+  constructor(private boardService: BoardService,private route:ActivatedRoute) {}
+
+    
 
   onSave() {
-    this.boardService.editCardName(this.index, this.newTitle, 0,0,this.listName);
-    console.log(this.listName);
+    
     console.log(this.index);
+    this.boardService.editCardName(this.index, this.newTitle,this.listIndex,this.bindex,this.description);
+    
   }
+
+
 }
