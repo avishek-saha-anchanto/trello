@@ -24,12 +24,12 @@
           </svg>
         </button>
         <div
-        style="background-color:#263646"
-        class="offcanvas offcanvas-start"
-        data-bs-scroll="true"
-        tabindex="-1"
-        id="offcanvasWithBothOptions"
-        aria-labelledby="offcanvasWithBothOptionsLabel"
+          style="background-color:#263646"
+          class="offcanvas offcanvas-start"
+          data-bs-scroll="true"
+          tabindex="-1"
+          id="offcanvasWithBothOptions"
+          aria-labelledby="offcanvasWithBothOptionsLabel"
         >
           <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel" style="color: white; font-size: 24px; text-align: center;">
@@ -43,89 +43,64 @@
             ></button>
           </div>
           <div class="offcanvas-body" style="color: white; font-size: 15px; padding: 5px; text-align: center;">
-
-          <div *ngIf="showBoardsFlag" style="padding: 10px;">
-          <!-- Display the "Close Boards" button when showBoardsFlag is true -->
-          <button type="button" class="btn btn-danger" (click)="showBoards()">Close Boards</button>
-          </div>
-          <div *ngIf="!showBoardsFlag" style="padding: 10px;">
-          <!-- Display the "Show Boards" button when showBoardsFlag is false -->
-          <button type="button" class="btn btn-primary" (click)="showBoards()">Show Boards</button>
-          </div>
-          <div style="padding: 10px;">
-            <button type="button" mat-raised-button class="btn btn-success" style="padding: 10px;" (click)="openBoardFormDialog()">Create Board</button>
-          </div>
-            <div *ngIf="showBoardsFlag" style="margin: 10px;">
-              <div *ngFor="let board of boards">
-                {{ board }}
-              </div>
+            <div style="padding: 10px;">
+              <button type="button" mat-raised-button class="btn btn-success" style="padding: 10px;" (click)="openBoardFormDialog()">Create Board</button>
+            </div>
+            <div style="padding: 10px;">
+              <button type="button" mat-raised-button class="btn btn-success" style="padding: 10px;" [routerLink]="['/']">Go Back</button>
             </div>
           </div>
-          
         </div>
         <h1>Trello</h1>
       </div>
     </div>
   </div>
 
-  
-
-
   <div class="board">
     <div class="board-bar">
-      <p class="board-name">{{ board.name }}</p>
+       <p class="board-name">{{ board?.name }}</p> 
     </div>
 
     <div class="board-wrapper">
       <div class="board-lists" cdkDropListGroup>
-        <div
-          class="board-list"
-          *ngFor="let list of board.lists; let listIndex = index"
-        >
-          <div class="list-title">
-            {{ list.name }}
-          </div>
-
-          <div
-            class="tasks-container"
-            cdkDropList
-            [cdkDropListData]="list.tasks"
-            (cdkDropListDropped)="drop($event)"
-          >
-            <div
-              class="task"
-              *ngFor="let item of list.tasks; let itemIndex = index"
-              cdkDrag
-            >
+        <div class="board-list" *ngFor="let list of board?.lists; let listIndex = index">
+          <div class="list-title">{{ list?.name }}</div>
+          <div class="tasks-container" cdkDropList [cdkDropListData]="list?.tasks" (cdkDropListDropped)="drop($event)">
+            
+            
+            
+            <div class="task" *ngFor="let item of list?.tasks; let itemIndex = index" cdkDrag>
               <app-card
                 [item]="item.name"
                 [index]="itemIndex"
                 [listName]="list.name"
               ></app-card>
             </div>
+
+            <div></div>
             <div class="tasks-container">
               <input type="text" #inputField />
               <button
                 class="btn btn-success"
                 style="margin-left: 20px"
                 type="button"
-                (click)="addCard(inputField.value, listIndex); inputField.value = ''"
+                (click)="addCard(listIndex,inputField.value ,bindex); inputField.value = ''"
               >
 
 
                 Add Card
               </button>
             </div>
+
           </div>
         </div>
+        <div class="form-container">
+          <form (submit)="addListToLists(newListTitle)">
+            <input type="text" class="inputbox" [(ngModel)]="newListTitle" name="newListTitle" placeholder="Enter new list title">
+            <button type="submit" class="add-list-button">Add List</button>
+          </form>
+        </div>
       </div>
-      <div class="form-container">
-        <form (submit)="addListToLists(newListTitle)">
-          <input type="text" class="inputbox" [(ngModel)]="newListTitle" name="newListTitle" placeholder="Enter new list title">
-          <button type="submit" class="add-list-button">Add List</button>
-        </form>
-      </div>
-    </div>
     </div>
   </div>
-
+</div>

@@ -17,7 +17,7 @@ export class CardComponent {
   constructor(private boardService: BoardService) {}
 
   onSave() {
-    this.boardService.editCardName(this.index, this.newTitle, this.listName);
+    this.boardService.editCardName(this.index, this.newTitle, 0,0,this.listName);
     console.log(this.listName);
     console.log(this.index);
   }

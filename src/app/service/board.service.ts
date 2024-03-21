@@ -7,37 +7,48 @@ import { Card } from '../card.model';
   providedIn: 'root',
 })
 export class BoardService {
-  board: Board = new Board('Test Board', [
-    new List('To do', [
-      new Card('Get to work',''),
-      new Card('Pick up groceries',''),
-      new Card('Go home',''),
-      new Card('Fall asleep',''),
-    ]),
-    new List('In progress', [new Card('Finishing project','')]),
-    new List('Done', [new Card('Created a recipe app',''), new Card('Angular Course','')]),
-  ]);
+  boards: Board[] = [];
 
-  getBoard() {
-    return this.board;
+  constructor() {}
+
+  getBoards(): Board[] {
+    return this.boards;
   }
 
-  addList(newList: List) {
-    this.board.lists.push(newList);
-    console.log(this.board.lists);
+  addList(newList: List, boardIndex: number) {
+    this.boards[boardIndex].lists.push(newList);
   }
 
+  addCardToList(listIndex: number, card: Card, boardIndex: number) {
+    console.log(card)
+    this.boards[boardIndex].lists[listIndex].tasks.push(card);
+  }
 
-  editCardName(index: number, newName: string, listName: string) {
-    let listIndex = this.board.lists.findIndex(
-      (list) => list.name === listName
-    );
-    let list = this.board.lists[listIndex];
+  addBoard(newBoard: Board) {
+    this.boards.push(newBoard);
+    
+    
+  }
+
+  clearBoard()
+  {
+    this.boards=[]
+  }
+
+  getBoardById(boardIndex: number): Board {
+    return this.boards[boardIndex];
+    
+  }
+
+  editCardName(index: number, newName: string, listIndex: number, boardIndex: number,description:string) {
+    const list = this.boards[boardIndex].lists[listIndex];
     list.tasks[index].name = newName;
-    console.log(list);
+    list.tasks[index].description = description;
+
+
   }
-  addCardOnBoard(index: number, cardTitle: string) {
-    this.board.lists[index].tasks.push(new Card (cardTitle,''));
-    console.log(this.board.lists[index]);
+
+  addCardOnBoard( cardTitle: string, listIndex: number, boardIndex: number) {
+    this.boards[boardIndex].lists[listIndex].tasks.push(new Card(cardTitle, ''));
   }
 }
