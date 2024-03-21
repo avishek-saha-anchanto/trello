@@ -28,13 +28,22 @@ export class BoardService {
   }
 
 
-  editCardName(index: number, newName: string, listName: string) {
+  editCardName(index: number, newName: string,newDescription:string, listName: string) {
     let listIndex = this.board.lists.findIndex(
       (list) => list.name === listName
     );
     let list = this.board.lists[listIndex];
     list.tasks[index].name = newName;
+    list.tasks[index].description = newDescription;
     console.log(list);
+  }
+  getCard(index:number,listName:string)
+  {
+    let listIndex = this.board.lists.findIndex(
+      (list) => list.name === listName
+    );
+    let list = this.board.lists[listIndex];
+    return list.tasks[index];
   }
   addCardOnBoard(index: number, cardTitle: string) {
     this.board.lists[index].tasks.push(new Card (cardTitle,''));
