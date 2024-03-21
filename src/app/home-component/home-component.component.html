@@ -46,22 +46,22 @@
             <div class="offcanvas-body" style="color: white; font-size: 15px; padding: 5px; text-align: center;">
   
             <div *ngIf="showBoardsFlag" style="padding: 10px;">
-            <!-- Display the "Close Boards" button when showBoardsFlag is true -->
+            
             <button type="button" class="btn btn-danger" (click)="showBoards()">Close Boards</button>
             </div>
             <div *ngIf="!showBoardsFlag" style="padding: 10px;">
-            <!-- Display the "Show Boards" button when showBoardsFlag is false -->
+            
             <button type="button" class="btn btn-primary" (click)="showBoards()">Show Boards</button>
             </div>
             <div style="padding: 10px;">
               <button type="button" mat-raised-button class="btn btn-success" style="padding: 10px;" (click)="openBoardFormDialog()">Create Board</button>
             </div>
               <div *ngIf="showBoardsFlag" style="margin: 10px;">
-                <div *ngFor="let board of boards; let i = index" (click)="clearBoard()">
-                    <a [routerLink]="['/board', i]">
+                <div *ngFor="let board of boards; let i = index" >
+                  <a [routerLink]="['/board', i]">
                       {{ board.name }}
-                    </a>
-                  </div>
+                  </a>
+              </div>
               </div>
             </div>
             
