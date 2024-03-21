@@ -62,7 +62,6 @@
       flex-grow: 1;
       border: 1px solid #4a627a;
       border-radius: 20px;
-
       .list-title {
         background-color: #34495e;
         color: #ffffff;
@@ -74,7 +73,8 @@
         margin: 15px;
         padding: 20px;
         border-radius: 20px;
-        
+        text-align: center;
+
         .column-title {
           font-size: 25px;
           font-weight: 800;
@@ -104,11 +104,11 @@
 }
 
 .offcanvas {
-  z-index: 4000; /* Adjust this value as needed */
+  z-index: 4000;
 }
 
 .dialog-container {
-  z-index: 5100; /* Higher value than the offcanvas sidebar */
+  z-index: 5100; 
 }
 
 .form-container {

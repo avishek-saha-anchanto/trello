@@ -1,75 +1,114 @@
-
 <div class="root">
-    <div class="navbar">
-      <div>
-        <div class="d-flex align-items-center">
-          <button
-            class="btn btn-primary"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasWithBothOptions"
-            aria-controls="offcanvasWithBothOptions"
+  <div class="navbar">
+    <div>
+      <div class="d-flex align-items-center">
+        <button
+          class="btn btn-primary"
+          type="button"
+          id="offcanvas-btn"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasWithBothOptions"
+          aria-controls="offcanvasWithBothOptions"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-list"
+            viewBox="0 0 16 16"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-list"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
-              />
-            </svg>
-          </button>
-          <div
-          style="background-color:#263646"
+            <path
+              fill-rule="evenodd"
+              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+            />
+          </svg>
+        </button>
+        <div
+          style="background-color: #263646"
           class="offcanvas offcanvas-start"
           data-bs-scroll="true"
           tabindex="-1"
           id="offcanvasWithBothOptions"
           aria-labelledby="offcanvasWithBothOptionsLabel"
+        >
+          <div class="offcanvas-header">
+            <h5
+              class="offcanvas-title"
+              id="offcanvasWithBothOptionsLabel"
+              style="
+                color: white;
+                font-size: 24px;
+                text-align: center;
+                margin-top: 14px;
+              "
+            >
+              Trello
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn btn-light"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div
+            class="offcanvas-body"
+            style="
+              color: white;
+              font-size: 15px;
+              padding: 5px;
+              text-align: center;
+            "
           >
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel" style="color: white; font-size: 24px; text-align: center;">
-                Trello
-              </h5>
+            <div *ngIf="showBoardsFlag" style="padding: 10px">
               <button
                 type="button"
-                class="btn-close"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              ></button>
+                class="btn btn-danger"
+                (click)="showBoards()"
+              >
+                Close Boards
+              </button>
             </div>
-            <div class="offcanvas-body" style="color: white; font-size: 15px; padding: 5px; text-align: center;">
-  
-            <div *ngIf="showBoardsFlag" style="padding: 10px;">
-            
-            <button type="button" class="btn btn-danger" (click)="showBoards()">Close Boards</button>
+            <div *ngIf="!showBoardsFlag" style="padding: 10px">
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="showBoards()"
+              >
+                Show Boards
+              </button>
             </div>
-            <div *ngIf="!showBoardsFlag" style="padding: 10px;">
-            
-            <button type="button" class="btn btn-primary" (click)="showBoards()">Show Boards</button>
+            <div style="padding: 10px">
+              <button
+                type="button"
+                mat-raised-button
+                class="btn btn-success"
+                style="padding: 10px"
+                (click)="openBoardFormDialog()"
+              >
+                Create Board
+              </button>
             </div>
-            <div style="padding: 10px;">
-              <button type="button" mat-raised-button class="btn btn-success" style="padding: 10px;" (click)="openBoardFormDialog()">Create Board</button>
-            </div>
-              <div *ngIf="showBoardsFlag" style="margin: 10px;">
-                <div *ngFor="let board of boards; let i = index" >
-                  <a [routerLink]="['/board', i]">
-                      {{ board.name }}
-                  </a>
+            <div *ngIf="showBoardsFlag" style="margin: 10px">
+              <div *ngFor="let board of boards; let i = index">
+                <a [routerLink]="['/board', i]">
+                  {{ board.name }}
+                </a>
               </div>
-              </div>
             </div>
-            
           </div>
-          <h1>Trello</h1>
         </div>
+        <h1>Trello</h1>
       </div>
-
-
-    </div> 
-    
+    </div>
+  </div>
+  <div
+    class="d-flex justify-content-center align-items-center"
+    style="height: 400px"
+  >
+    <h1 style="color: white; font-size: 36px; font-family: 'Arial', sans-serif">
+      Welcome to Trello
+    </h1>
+  </div>
+</div>
