@@ -14,21 +14,27 @@ export class CardComponent implements OnInit {
   @Input() index: number;
   @Input() listName: string;
   @Input() listIndex: number;
+  bindex:number
 
   newTitle: string = '';
   description: string = '';
 
-  onSave() {
-    this.boardService.editCardName(this.index, this.newTitle, 0,0,this.listName);
-    console.log(this.listName);
-    console.log(this.index);
-  }
+  
   constructor(
     private boardService: BoardService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const boardIndex = +params['id']; 
+      this.bindex=boardIndex
+      
+      
+       
+    });
+  }
+    
   openModalCardEdit() {
     this.router.navigate(['edit', this.listName, this.index], {
       relativeTo: this.route,
@@ -42,5 +48,11 @@ export class CardComponent implements OnInit {
   }
   closeModalCardDetail() {
     this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
+  onSave() {
+    this.boardService.editCardName(this.index, this.newTitle,this.listIndex,this.bindex,this.description);
+    console.log(this.listName);
+    console.log(this.index);
   }
 }

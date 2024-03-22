@@ -42,12 +42,20 @@ export class BoardService {
     
   }
 
-  editCardName(index: number, newName: string, listIndex: number, boardIndex: number,description:string) {
-    const list = this.boards[boardIndex].lists[listIndex];
-    list.tasks[index].name = newName;
-    list.tasks[index].description = description;
-
-
+  editCardName(index: number, newName: string, listIndex: number, boardIndex: number, description: string) {
+    const board = this.boards[boardIndex];
+    if (board && board.lists && board.lists[listIndex] && board.lists[listIndex].tasks) {
+      const card = board.lists[listIndex].tasks[index];
+      console.log(card.name)
+      if (card) {
+        card.name = newName;
+        card.description = description;
+      } else {
+        console.error(`Card not found at index ${index} in list ${listIndex} of board ${boardIndex}`);
+      }
+    } else {
+      console.error(`Invalid board or list at index ${boardIndex} or ${listIndex}`);
+    }
   }
 
   addCardOnBoard( cardTitle: string, listIndex: number, boardIndex: number) {
