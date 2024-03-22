@@ -66,6 +66,9 @@ export class BoardComponent implements OnInit {
         event.currentIndex);
     }
   }
+  drop2(event: CdkDragDrop<string[]>,lists:List[]) {
+    moveItemInArray(lists, event.previousIndex, event.currentIndex);
+  }
 
   openBoardFormDialog(): void {
     const dialogRef = this.dialog1.open(BoardformComponent, {
