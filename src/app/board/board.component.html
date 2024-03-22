@@ -96,10 +96,17 @@
     </div>
 
     <div class="board-wrapper">
-      <div class="board-lists" cdkDropListGroup>
+      <div
+        class="board-lists example-list"
+        cdkDropListGroup
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="drop2($event, board.lists)"
+      >
         <div
           class="board-list"
           *ngFor="let list of board?.lists; let listIndex = index"
+          cdkDrag
         >
           <div class="list-title">{{ list?.name | uppercase }}</div>
           <div
@@ -122,10 +129,20 @@
             </div>
             <div class="tasks-container">
               <div style="display: flex">
-                <input type="text" #inputField style="flex: 1; min-width: 0" />
+                <input
+                  type="text"
+                  #inputField
+                  style="
+                    flex: 1;
+                    min-width: 0;
+                    background-color: rgb(244, 219, 219);
+                    border-radius: 30px;
+                  "
+                  placeholder="Enter Card Title"
+                />
                 <button
                   class="btn btn-success"
-                  style="margin-left: 20px"
+                  style="margin-left: 20px; border-radius: 20px"
                   type="button"
                   (click)="
                     addCard(listIndex, inputField.value, bindex);
