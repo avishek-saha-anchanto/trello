@@ -1,1 +1,7 @@
-<p>card-details works!</p>
+<div *ngIf="isModal" class="modal-background">
+  <div class="modal-content">
+    <h3 style="color: black">Title: {{ card.name }}</h3>
+    <h4 style="color: black">Description: {{ card.description }}</h4>
+    <button class="close-btn" (click)="closeModal()">Close</button>
+  </div>
+</div>
