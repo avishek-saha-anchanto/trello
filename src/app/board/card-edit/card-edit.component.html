@@ -1,0 +1,27 @@
+<div *ngIf="isModalEdit" class="modal-background">
+    <div class="modal-content">
+      <h3 style="color: black">Title: </h3>
+      <h4 style="color: black">Description:</h4>
+      <div>
+        <input
+          type="text"
+          name=""
+          id="input"
+          class="form-control"
+          [(ngModel)]="newTitle"
+          required="required"
+          placeholder="Title"
+        />
+        <textarea
+          name=""
+          id=""
+          cols="55"
+          rows="5"
+          [(ngModel)]="description"
+          placeholder="Description"
+        ></textarea>
+      </div>
+      <button class="close-btn" (click)="closeModal()">Close</button>
+    </div>
+  </div>
+  

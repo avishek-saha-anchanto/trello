@@ -14,6 +14,8 @@ export class CardComponent implements OnInit {
   @Input() listName: string;
   @Input() listIndex: number;
   bindex: number;
+  isModal:boolean=false;
+  isModalEdit:boolean=false;
 
   newTitle: string = '';
   description: string = '';
@@ -31,20 +33,16 @@ export class CardComponent implements OnInit {
   }
 
   openModalCardEdit() {
-    this.router.navigate(['edit', this.listName, this.index], {
-      relativeTo: this.route,
-    });
+    this.isModalEdit=!this.isModalEdit;
   }
   openModalCardDetail() {
-    this.router.navigate(['detail', this.listName, this.index], {
-      relativeTo: this.route,
-    });
+    this.isModal=!this.isModal;
+    // this.router.navigate(['detail', this.listName, this.index], {
+    //   relativeTo: this.route,
+    // });
     console.log(this.card);
   }
-  closeModalCardDetail() {
-    this.router.navigate(['../'], { relativeTo: this.route });
-  }
-
+  
   onSave() {
     this.boardService.editCardName(
       this.index,

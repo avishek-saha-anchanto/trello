@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home-component/home-component.component';
 import { CardDetailsComponent } from './board/card-details/card-details.component';
 import path from 'path';
+import { CardEditComponent } from './board/card-edit/card-edit.component';
 
 
 
@@ -23,7 +24,7 @@ const appRoutes:Routes=[
   {path: 'boardform',component:BoardformComponent},
   {path:'',component: HomeComponent},
   {path: 'board/:id', component: BoardComponent,children:[
-    { path: 'detail/:id/:id', component: CardComponent}
+    { path: 'detail/:id/:id', component: CardDetailsComponent}
   ] },
 
 
@@ -35,7 +36,9 @@ const appRoutes:Routes=[
     BoardComponent,
     CardComponent,
     BoardformComponent,
-    HomeComponent
+    HomeComponent,
+    CardDetailsComponent,
+    CardEditComponent
   ],
   imports: [
     BrowserModule,DragDropModule,RouterModule.forRoot(appRoutes),FormsModule,HttpClientModule
