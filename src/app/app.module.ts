@@ -23,7 +23,7 @@ const appRoutes:Routes=[
   {path: 'boardform',component:BoardformComponent},
   {path:'',component: HomeComponent},
   {path: 'board/:id', component: BoardComponent,children:[
-    {path:':id/:id/:id',component:CardDetailsComponent }
+    { path: 'detail/:id/:id', component: CardComponent}
   ] },
 
 
