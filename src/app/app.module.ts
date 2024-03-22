@@ -14,13 +14,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home-component/home-component.component';
+import { CardDetailsComponent } from './board/card-details/card-details.component';
+import path from 'path';
 
 
 
 const appRoutes:Routes=[
   {path: 'boardform',component:BoardformComponent},
   {path:'',component: HomeComponent},
-  {path: 'board/:id', component: BoardComponent }
+  {path: 'board/:id', component: BoardComponent,children:[
+    {path:':id/:id/:id',component:CardDetailsComponent }
+  ] },
 
 
 ]
