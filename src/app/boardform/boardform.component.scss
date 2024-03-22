@@ -1,119 +1,114 @@
 .container {
-    background-color: #34495e;
-    color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    position: relative;
-  }
-  
-  .close-btn {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    cursor: pointer;
-    color: #aaa;
-    font-size: 30px;
-  }
-  
-  .close-btn:hover {
-    color: #fff;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .form-control {
-    background-color: rgba(0, 123, 255, 0.3);
-    color: #fff;
-    border-color: #555;
-  }
-  
-  .btn_p {
-    background-color: rgba(0, 123, 255, 0.0);
-    color: #fff;
-    border-color: #1eff00c2;
-    padding: 10px;
-    margin: 4px;
-  }
-  
-  .btn1 {
-    background-color: rgba(0, 123, 255, 0.0);
-    color:white;
-    border-color: #ff3c00e0;
-    padding: 10px;
-    margin: 4px;
-  }
-  
-  .btn2 {
-    background-color: rgba(0, 123, 255, 0.0);
-    color: #fff;
-    border-color: #1eff00c2;
-    padding: 10px;
-    margin: 4px;
-  }
+  background-color: #34495e;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  max-height: 80vh; /* Set maximum height */
+  overflow-y: auto;
+}
 
-    .btn3{
-    background-color: #34495e;
-    color:white;
-    border-color: #ff3c00e0;
-    padding: 10px;
-    margin: 2px;
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  color: #aaa;
+  font-size: 30px;
+}
 
-    }
-  
-  
+.close-btn:hover {
+  color: #fff;
+}
 
-  .input_group{
-    margin: 4px;
-    padding: 5px;
-    border-radius: 4px;
+.form-group {
+  margin-bottom: 20px;
+}
 
-  }
+.form-control {
+  background-color: rgba(0, 123, 255, 0.3);
+  color: #fff;
+  border-color: #555;
+}
 
-  .input_group_append{
-    margin: 4px;
-    padding: 5px;
-    border-radius: 4px;
+.btn_p {
+  background-color: rgba(0, 123, 255, 0);
+  color: #fff;
+  border-color: #1eff00c2;
+  padding: 10px;
+  margin: 4px;
+}
 
-  }
+.btn1 {
+  background-color: rgba(0, 123, 255, 0);
+  color: white;
+  border-color: #ff3c00e0;
+  padding: 10px;
+  margin: 4px;
+}
 
-  .card-group {
-    display: flex;
-    flex-direction: column;
-    padding:10px ;
-  }
-  
-  .card {
-    margin-bottom: 10px;
-    padding: 5px;
-    border-radius: 4px;
-    color: black;
-    background-color:#34495e;
-  }
-  
-  .card textarea {
-    background-color: rgba(0, 123, 255, 0.3); /* Match the background color of adding a list */
-    color:white;
-    border: 1px solid #555; /* Match the border color of adding a list */
-    padding: 5px;
-    border-radius: 4px;
-    resize: vertical; /* Allow vertical resizing of textarea */
-  }
-  
-  .card textarea:focus {
-    outline: none; /* Remove outline on focus */
-    border-color: #007bff; /* Change border color on focus */
-  }
+.btn2 {
+  background-color: rgba(0, 123, 255, 0);
+  color: #fff;
+  border-color: #1eff00c2;
+  padding: 10px;
+  margin: 4px;
+}
 
-  .form-control:focus {
-    outline: none; /* Remove outline on focus */
-    border-color: #007bff; /* Change border color on focus */
-  }
+.btn3 {
+  background-color: #34495e;
+  color: white;
+  border-color: #ff3c00e0;
+  padding: 10px;
+  margin: 2px;
+}
 
-  
+.input_group {
+  margin: 4px;
+  padding: 5px;
+  border-radius: 4px;
+}
 
-  
+.input_group_append {
+  margin: 4px;
+  padding: 5px;
+  border-radius: 4px;
+}
 
+.card-group {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
 
-  
+.card {
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 4px;
+  color: black;
+  background-color: #34495e;
+}
+
+.card textarea {
+  background-color: rgba(
+    0,
+    123,
+    255,
+    0.3
+  ); /* Match the background color of adding a list */
+  color: white;
+  border: 1px solid #555; /* Match the border color of adding a list */
+  padding: 5px;
+  border-radius: 4px;
+  resize: vertical; /* Allow vertical resizing of textarea */
+}
+
+.card textarea:focus {
+  outline: none; /* Remove outline on focus */
+  border-color: #007bff; /* Change border color on focus */
+}
+
+.form-control:focus {
+  outline: none; /* Remove outline on focus */
+  border-color: #007bff; /* Change border color on focus */
+}

@@ -3,7 +3,6 @@ import { BoardService } from '../../service/board.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Card } from '../../card.model';
 
-
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -14,27 +13,23 @@ export class CardComponent implements OnInit {
   @Input() index: number;
   @Input() listName: string;
   @Input() listIndex: number;
-  bindex:number
+  bindex: number;
 
   newTitle: string = '';
   description: string = '';
 
-  
   constructor(
     private boardService: BoardService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      const boardIndex = +params['id']; 
-      this.bindex=boardIndex
-      
-      
-       
+    this.route.params.subscribe((params) => {
+      const boardIndex = +params['id'];
+      this.bindex = boardIndex;
     });
   }
-    
+
   openModalCardEdit() {
     this.router.navigate(['edit', this.listName, this.index], {
       relativeTo: this.route,
@@ -51,7 +46,13 @@ export class CardComponent implements OnInit {
   }
 
   onSave() {
-    this.boardService.editCardName(this.index, this.newTitle,this.listIndex,this.bindex,this.description);
+    this.boardService.editCardName(
+      this.index,
+      this.newTitle,
+      this.listIndex,
+      this.bindex,
+      this.description
+    );
     console.log(this.listName);
     console.log(this.index);
   }

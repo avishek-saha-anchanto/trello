@@ -60,8 +60,5 @@ export class BoardService {
 
   addCardOnBoard( cardTitle: string, listIndex: number, boardIndex: number) {
     this.boards[boardIndex].lists[listIndex].tasks.push(new Card(cardTitle, ''));
-  
-  
-  
   }
 }
