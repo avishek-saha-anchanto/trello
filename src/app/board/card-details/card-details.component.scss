@@ -8,15 +8,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.modal-content {
-  background-color: #f19191;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 300px;
-  width: 100%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  .modal-content {
+    background-color: #f19191;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 300px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
 }
 
 .close-btn {
@@ -27,7 +26,6 @@
   border-radius: 5px;
   cursor: pointer;
 }
-
 .close-btn:hover {
   background-color: #ddd;
 }
