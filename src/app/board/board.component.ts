@@ -10,6 +10,7 @@ import { Card } from '../card.model';
 import { map } from 'rxjs';
 import { response } from 'express';
 import { ActivatedRoute } from '@angular/router';
+import { FirebaseService } from '../service/firebase.service';
 
 
 
@@ -33,13 +34,22 @@ export class BoardComponent implements OnInit {
   showModal: boolean=false;
   dialogRef: MatDialogRef<BoardformComponent> | undefined;
 
-  constructor(private boardService: BoardService, public dialog1: MatDialog, private dialog: MatDialog,private http:HttpClient,private route:ActivatedRoute) {}
+  constructor(private boardService: BoardService, public dialog1: MatDialog, private dialog: MatDialog,private http:HttpClient,private route:ActivatedRoute,private firebaseService:FirebaseService) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       const boardIndex = +params['id']; 
-      this.bindex=boardIndex
-      this.board = this.boardService.getBoardById(boardIndex);
+      this.bindex=boardIndex;
+      this.firebaseService.fetchBoards().subscribe({
+        next: (res: Board[]) => {
+          console.log(res);
+          this.board = res[this.bindex];
+        },
+        error: (error) => {
+          console.error('An error occurred:', error);
+          // Handle the error as needed
+        }
+      });
       console.log(this.board)
       
        
@@ -117,74 +127,13 @@ showBoards(){
 }
 
 fetchDataFromFirebase() {
+  this.firebaseService.fetchBoards().subscribe(res=>{
+    console.log(res);
+    this.boards=res;
+
+  });
   
-  this.boardService.clearBoard();
   
-  // Make an HTTP GET request to your Firebase Realtime Database URL
-  this.http.get<any>('https://trelloclone-219b5-default-rtdb.firebaseio.com/.json')
-    .subscribe(data => {
-      console.log(data);
-      
-      
-      for (const Key in data) {
-        
-        const boardData=data[Key];
-        
-         
-        const newBoard = new Board(boardData, []);
-        
-        
-          
-
-          for (const listKey in boardData) {
-            if (listKey.startsWith('list')) {
-              
-              const listData = boardData[listKey];
-              const newList = new List(listData, []);
-
-              for (const taskKey in boardData) {
-                var i=0;
-                
-                if (taskKey.startsWith('card'+i)) {
-                  const cardData = boardData[taskKey];
-                  
-                  const newCard = new Card(cardData, '');
-                  
-                  newList.tasks.push(newCard);
-                }
-              }
-              
-              i=i+1;
-              newBoard.lists.push(newList);
-            }
-          }
-          
-          var newname=''
-
-          for(const namekey in newBoard)
-          {
-            
-            if(namekey.startsWith('name'))
-            {
-              
-               newname=newBoard[namekey].board
-              
-            }
-          }
-
-          newBoard.name=newname;
-          
-          this.boardService.addBoard(newBoard);
-          
-
-        
-      }
-
-      
-
-      this.boards=this.boardService.getBoards();
-      
-    });
   }
 
 
