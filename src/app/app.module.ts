@@ -11,7 +11,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { CardComponent } from './board/card/card.component';
 import { BoardformComponent } from './boardform/boardform.component';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home-component/home-component.component';
 import { CardDetailsComponent } from './board/card-details/card-details.component';
@@ -41,7 +41,7 @@ const appRoutes:Routes=[
     CardEditComponent
   ],
   imports: [
-    BrowserModule,DragDropModule,RouterModule.forRoot(appRoutes),FormsModule,HttpClientModule
+    BrowserModule,DragDropModule,RouterModule.forRoot(appRoutes),FormsModule,HttpClientModule,ReactiveFormsModule
   ],
   providers: [provideClientHydration(), provideAnimationsAsync()],
   bootstrap: [AppComponent],

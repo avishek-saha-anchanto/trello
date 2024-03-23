@@ -28,8 +28,6 @@ export class BoardService {
 
   addBoard(newBoard: Board) {
     this.boards.push(newBoard);
-    
-    
   }
 
   clearBoard()
