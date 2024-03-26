@@ -88,10 +88,26 @@ export class BoardComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
+        this.firebaseService.updateBoard(this.key, this.board).subscribe(
+          () => {
+            console.log('Board data updated successfully.');
+          },
+          (error) => {
+            console.error('Error updating board data:', error);
+          }
+        );
     }
   }
   drop2(event: CdkDragDrop<string[]>,lists:List[]) {
     moveItemInArray(lists, event.previousIndex, event.currentIndex);
+    this.firebaseService.updateBoard(this.key, this.board).subscribe(
+      () => {
+        console.log('Board data updated successfully.');
+      },
+      (error) => {
+        console.error('Error updating board data:', error);
+      }
+    );
   }
 
   openBoardFormDialog(): void {
@@ -147,6 +163,23 @@ fetchDataFromFirebase() {
   });
   
   
+  }
+
+  deleteList(listIndex: number) {
+    if (confirm('Are you sure you want to delete this list?')) {
+      
+      this.board.lists.splice(listIndex, 1);
+  
+      
+      this.firebaseService.updateBoard(this.key, this.board).subscribe(
+        () => {
+          console.log('Board data updated successfully after deleting list.');
+        },
+        (error) => {
+          console.error('Error updating board data after deleting list:', error);
+        }
+      );
+    }
   }
 
 
