@@ -1,4 +1,4 @@
-<div class="root">
+<div class="root d-flex flex-column">
   <div class="navbar">
     <div>
       <div class="d-flex align-items-center">
@@ -145,7 +145,7 @@
                   style="margin-left: 20px; border-radius: 20px"
                   type="button"
                   (click)="
-                    addCard(listIndex, inputField.value, bindex);
+                    addCard(listIndex, inputField?.value, bindex);
                     inputField.value = ''
                   "
                 >
@@ -170,4 +170,7 @@
       </div>
     </div>
   </div>
+  <button class="btn btn-success mx-auto my-10" (click)="saveChanges()" style="width: 50%">
+    Save Changes
+  </button>
 </div>

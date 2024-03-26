@@ -99,10 +99,6 @@ export class HomeComponent {
     this.showBoardsFlag = !this.showBoardsFlag;
   }
 
-  clearBoard() {
-    this.boardService.clearBoard();
-  }
-
   // fetchDataFromFirebase() {
   //   this.firebaseService.fetchBoards().subscribe({
   //     next: (res: Board[]) => {

@@ -46,6 +46,7 @@ export class BoardComponent implements OnInit {
     this.boardService.boardsChanged.subscribe((boards:Board[])=>{
       this.boards=boards;
       this.board=this.boards[this.bindex];
+      console.log("bcom ngSubs",boards[this.bindex]);
     })
     
    
@@ -67,6 +68,7 @@ export class BoardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
+    
   }
   drop2(event: CdkDragDrop<string[]>,lists:List[]) {
     moveItemInArray(lists, event.previousIndex, event.currentIndex);
@@ -94,15 +96,15 @@ export class BoardComponent implements OnInit {
   }
 
   addCard( listIndex: number,cardName: string,bindex:number) {
-    console.log(listIndex)
-    console.log(cardName)
-    console.log(bindex)
+    console.log(listIndex);
+    console.log(cardName);
+    console.log(bindex);
     if (cardName.length == 0) return;
     if (this.isAdd && this.addingToListIndex === listIndex) {
       this.isAdd = false;
-      this.addingToListIndex = -1;
+      //this.addingToListIndex = -1;
     } else {
-      this.addingToListIndex = listIndex;
+      //this.addingToListIndex = listIndex;
       this.isAdd = !this.isAdd;
     }
     this.boardService.addCardOnBoard(cardName,listIndex,bindex);
@@ -118,6 +120,10 @@ showBoards(){
   this.showBoardsFlag = !this.showBoardsFlag;
 }
 
-
+saveChanges()
+{
+  this.boardService.setBoards(this.boards);
+  this.firebaseService.postData(this.board);
+}
 
 }

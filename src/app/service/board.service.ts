@@ -14,7 +14,6 @@ export class BoardService {
   constructor() {}
 
   setBoards(boards: Board[]) {
-    console.log("setBoards");
     this.boards = boards;
   }
   getBoards(): Board[] {

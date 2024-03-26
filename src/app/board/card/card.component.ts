@@ -43,15 +43,5 @@ export class CardComponent implements OnInit {
     console.log(this.card);
   }
   
-  onSave() {
-    this.boardService.editCardName(
-      this.index,
-      this.newTitle,
-      this.listIndex,
-      this.bindex,
-      this.description
-    );
-    console.log(this.listName);
-    console.log(this.index);
-  }
+  
 }

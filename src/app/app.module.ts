@@ -15,7 +15,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home-component/home-component.component';
 import { CardDetailsComponent } from './board/card-details/card-details.component';
-import path from 'path';
 import { CardEditComponent } from './board/card-edit/card-edit.component';
 import { BoardResolver } from './service/board-resolver';
 
