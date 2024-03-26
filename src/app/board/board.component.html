@@ -155,6 +155,7 @@
             </div>
           </div>
         </div>
+        
         <div class="form-container">
           <form (submit)="addListToLists(newListTitle)">
             <input
@@ -164,9 +165,10 @@
               name="newListTitle"
               placeholder="Enter new list title"
             />
-            <button type="submit" class="add-list-button">Add List</button>
+            <button type="submit" class="add-list-button" [disabled]="!newListTitle">Add List</button>
           </form>
         </div>
+        
       </div>
     </div>
   </div>

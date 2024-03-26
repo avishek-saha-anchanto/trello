@@ -11,6 +11,10 @@ import { map } from 'rxjs';
 import { response } from 'express';
 import { ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '../service/firebase.service';
+import { Router } from '@angular/router';
+
+
+
 
 
 
@@ -27,6 +31,7 @@ export class BoardComponent implements OnInit {
   cards:Card;
   bindex:number
   newListTitle: string = '';
+  key:string='';
   @ViewChild('inputField') inputField: ElementRef;
   cardName: string;
   addingToListIndex: number = -1;
@@ -34,7 +39,7 @@ export class BoardComponent implements OnInit {
   showModal: boolean=false;
   dialogRef: MatDialogRef<BoardformComponent> | undefined;
 
-  constructor(private boardService: BoardService, public dialog1: MatDialog, private dialog: MatDialog,private http:HttpClient,private route:ActivatedRoute,private firebaseService:FirebaseService) {}
+  constructor(private cdr: ChangeDetectorRef,private boardService: BoardService, public dialog1: MatDialog, private dialog: MatDialog,private http:HttpClient,private route:ActivatedRoute,private firebaseService:FirebaseService,private router:Router) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -42,15 +47,16 @@ export class BoardComponent implements OnInit {
       this.bindex=boardIndex;
       this.firebaseService.fetchBoards().subscribe({
         next: (res: Board[]) => {
-          console.log(res);
+          
           this.board = res[this.bindex];
+          this.boards=res;
         },
         error: (error) => {
           console.error('An error occurred:', error);
           // Handle the error as needed
         }
       });
-      console.log(this.board)
+      console.log(this.boards)
       
        
     });
@@ -61,9 +67,17 @@ export class BoardComponent implements OnInit {
   }
 
   addListToLists(newListTitle: string) {
+    console.log(this.boards)
+    this.key=this.boards[this.bindex].key;
+    console.log(this.key)
     const newList = new List(newListTitle, []);
-    this.boardService.addList(newList,this.bindex);
+    newList.tasks=[];
+    this.boardService.addList(newList,this.bindex,this.key);
     this.newListTitle='';
+    this.fetchDataFromFirebase();
+    this.cdr.detectChanges();
+    
+
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -102,9 +116,8 @@ export class BoardComponent implements OnInit {
   }
 
   addCard( listIndex: number,cardName: string,bindex:number) {
-    console.log(listIndex)
-    console.log(cardName)
-    console.log(bindex)
+    
+    this.key=this.boards[this.bindex].key;
     if (cardName.length == 0) return;
     if (this.isAdd && this.addingToListIndex === listIndex) {
       this.isAdd = false;
@@ -113,7 +126,7 @@ export class BoardComponent implements OnInit {
       this.addingToListIndex = listIndex;
       this.isAdd = !this.isAdd;
     }
-    this.boardService.addCardOnBoard(cardName,listIndex,bindex);
+    this.boardService.addCardOnBoard(cardName,listIndex,bindex,this.key);
     
   }
 
@@ -130,7 +143,7 @@ fetchDataFromFirebase() {
   this.firebaseService.fetchBoards().subscribe(res=>{
     console.log(res);
     this.boards=res;
-
+    console.log(this.boards)
   });
   
   

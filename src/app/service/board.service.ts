@@ -3,6 +3,7 @@ import { Board } from '../board.model';
 import { List } from '../list.model';
 import { Card } from '../card.model';
 import { HttpClient } from '@angular/common/http';
+import { FirebaseService } from './firebase.service';
 
 
 @Injectable({
@@ -11,14 +12,25 @@ import { HttpClient } from '@angular/common/http';
 export class BoardService {
   boards: Board[] = [];
 
-  constructor() {}
+  constructor(private firebaseService:FirebaseService) {}
 
   getBoards(): Board[] {
     return this.boards;
   }
 
-  addList(newList: List, boardIndex: number) {
-    this.boards[boardIndex].lists.push(newList);
+  addList(newList: List, boardIndex: number,key:string) {
+    
+    
+    this.firebaseService.postList(key, newList).subscribe(
+      response => {
+       
+       
+      },
+      error => {
+        console.error('Error adding list:', error);
+        
+      }
+    );
   }
 
   addCardToList(listIndex: number, card: Card, boardIndex: number) {
@@ -58,7 +70,17 @@ export class BoardService {
     }
   }
 
-  addCardOnBoard( cardTitle: string, listIndex: number, boardIndex: number) {
-    this.boards[boardIndex].lists[listIndex].tasks.push(new Card(cardTitle, ''));
+  addCardOnBoard( cardTitle: string, listIndex: number, boardIndex: number,key:string) {
+    const newCard: Card = { name: cardTitle, description: '' }; 
+    console.log(newCard)
+    this.firebaseService.addCard(key, listIndex, newCard).subscribe(
+    () => {
+      
+      
+    },
+    error => {
+      console.error('Error adding card:', error);
+    }
+  );
   }
 }
