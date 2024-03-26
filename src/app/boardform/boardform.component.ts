@@ -1,18 +1,32 @@
-import { Component, ElementRef, OnInit, ViewChild ,ChangeDetectorRef} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseService } from '../service/firebase.service';
-
+import { Router } from '@angular/router';
+import { MatDialogRef } from '@angular/material/dialog';
+import { BoardService } from '../service/board.service';
 
 @Component({
   selector: 'boardform',
   templateUrl: './boardform.component.html',
-  styleUrl: './boardform.component.scss'
+  styleUrl: './boardform.component.scss',
 })
 export class BoardformComponent {
   boardForm: FormGroup;
 
-  constructor(private fb: FormBuilder,private firebaseService:FirebaseService) {
+  constructor(
+    private fb: FormBuilder,
+    private firebaseService: FirebaseService,
+    private router: Router,
+    private dialogRef: MatDialogRef<BoardformComponent>,
+    private boardService:BoardService
+  ) {
     this.createForm();
   }
 
@@ -60,10 +74,14 @@ export class BoardformComponent {
   }
 
   onSubmit() {
+    //this.router.navigateByUrl('/');
     if (this.boardForm.valid) {
       console.log(this.boardForm.value);
+
       this.firebaseService.postData(this.boardForm.value);
+      this.boardService.addBoard(this.boardForm.value);
     }
+    this.dialogRef.close();
   }
 
   getControls(): any[] {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, map, throwError } from 'rxjs';
+import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { Board } from '../board.model';
 import { List } from '../list.model';
 import { Card } from '../card.model';
@@ -34,6 +34,34 @@ export class FirebaseService {
   }
 
   fetchBoards(): Observable<Board[]> {
+    //     this.http.delete('https://trelloclone-219b5-default-rtdb.firebaseio.com/.json').subscribe(res => {
+    //   console.log("deleted");
+    // });
+    // const dummyData: Board[] = [
+    //   new Board('Board 1', [
+    //     new List('List 1', [
+    //       new Card('Card 1', 'Description 1'),
+    //       new Card('Card 2', 'Description 2')
+    //     ]),
+    //     new List('List 2', [
+    //       new Card('Card 3', 'Description 3'),
+    //       new Card('Card 4', 'Description 4')
+    //     ])
+    //   ]),
+    //   new Board('Board 2', [
+    //     new List('List A', [
+    //       new Card('Card A', 'Description A'),
+    //       new Card('Card B', 'Description B')
+    //     ]),
+    //     new List('List B', [
+    //       new Card('Card X', 'Description X'),
+    //       new Card('Card Y', 'Description Y'),
+    //       new Card('Card Z', 'Description Z')
+    //     ])
+    //   ]),
+    // ]; 
+    // return of(dummyData);
+   
     return this.http.get<any>( 'https://trelloclone-219b5-default-rtdb.firebaseio.com/.json').pipe(
       map(data => {
         const boards: Board[] = [];

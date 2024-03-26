@@ -17,12 +17,13 @@ import { HomeComponent } from './home-component/home-component.component';
 import { CardDetailsComponent } from './board/card-details/card-details.component';
 import path from 'path';
 import { CardEditComponent } from './board/card-edit/card-edit.component';
+import { BoardResolver } from './service/board-resolver';
 
 
 
 const appRoutes:Routes=[
+  {path:'',component: HomeComponent, pathMatch: 'full',resolve:[BoardResolver]},
   {path: 'boardform',component:BoardformComponent},
-  {path:'',component: HomeComponent},
   {path: 'board/:id', component: BoardComponent,children:[
     { path: 'detail/:id/:id', component: CardDetailsComponent}
   ] },

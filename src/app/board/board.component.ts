@@ -40,21 +40,13 @@ export class BoardComponent implements OnInit {
     this.route.params.subscribe(params => {
       const boardIndex = +params['id']; 
       this.bindex=boardIndex;
-      this.firebaseService.fetchBoards().subscribe({
-        next: (res: Board[]) => {
-          console.log(res);
-          this.board = res[this.bindex];
-        },
-        error: (error) => {
-          console.error('An error occurred:', error);
-          // Handle the error as needed
-        }
-      });
-      console.log(this.board)
-      
-       
+      this.boards=this.boardService.getBoards();
+      this.board=this.boards[this.bindex];
     });
-    
+    this.boardService.boardsChanged.subscribe((boards:Board[])=>{
+      this.boards=boards;
+      this.board=this.boards[this.bindex];
+    })
     
    
     
@@ -126,15 +118,6 @@ showBoards(){
   this.showBoardsFlag = !this.showBoardsFlag;
 }
 
-fetchDataFromFirebase() {
-  this.firebaseService.fetchBoards().subscribe(res=>{
-    console.log(res);
-    this.boards=res;
-
-  });
-  
-  
-  }
 
 
 }
