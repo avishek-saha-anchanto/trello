@@ -4,6 +4,7 @@ import { List } from '../list.model';
 import { Card } from '../card.model';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import { FirebaseService } from './firebase.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ import { Subject } from 'rxjs';
 export class BoardService {
   boards: Board[] = [];
   boardsChanged = new Subject<Board[]>();
-  constructor() {}
+ 
 
   setBoards(boards: Board[]) {
     this.boards = boards;
@@ -21,8 +22,10 @@ export class BoardService {
   }
 
   addList(newList: List, boardIndex: number) {
+    console.log("addlist");
     this.boards[boardIndex].lists.push(newList);
     this.boardsChanged.next(this.boards.slice());
+   // this.firebaseService.postList(this.boards[boardIndex].key,newList);
   }
 
   addCardToList(listIndex: number, card: Card, boardIndex: number) {

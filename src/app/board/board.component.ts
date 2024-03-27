@@ -57,6 +57,8 @@ export class BoardComponent implements OnInit {
     const newList = new List(newListTitle, []);
     this.boardService.addList(newList,this.bindex);
     this.newListTitle='';
+    this.firebaseService.postList(this.board.key,newList);
+    console.log("AddListToList",this.board.key);
   }
 
   drop(event: CdkDragDrop<string[]>) {
