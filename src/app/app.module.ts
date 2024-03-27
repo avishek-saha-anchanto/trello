@@ -17,6 +17,7 @@ import { HomeComponent } from './home-component/home-component.component';
 import { CardDetailsComponent } from './board/card-details/card-details.component';
 import { CardEditComponent } from './board/card-edit/card-edit.component';
 import { BoardResolver } from './service/board-resolver';
+import { CardDeleteComponent } from './board/card-delete/card-delete.component';
 
 
 
@@ -38,7 +39,8 @@ const appRoutes:Routes=[
     BoardformComponent,
     HomeComponent,
     CardDetailsComponent,
-    CardEditComponent
+    CardEditComponent,
+    CardDeleteComponent
   ],
   imports: [
     BrowserModule,DragDropModule,RouterModule.forRoot(appRoutes),FormsModule,HttpClientModule,ReactiveFormsModule

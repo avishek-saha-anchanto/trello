@@ -42,11 +42,10 @@ export class BoardService {
     this.boards[boardIndex].lists[listIndex].tasks.push(card);
     this.boardsChanged.next(this.boards.slice());
   }
-  
+
   addBoard(newBoard: Board) {
     this.boards.push(newBoard);
     this.boardsChanged.next(this.boards.slice());
-
   }
 
   clearBoard() {
@@ -113,4 +112,24 @@ export class BoardService {
 
   }
   
+  deleteCard(cardIndex: number, listIndex: number, bIndex: number) {
+    console.log('Service Delete Card', cardIndex, listIndex, bIndex);
+
+    const board = this.boards[bIndex];
+    console.log(board);
+    const list = board.lists[listIndex];
+    console.log(list);
+
+    if (!list || !list.tasks || !Array.isArray(list.tasks)) {
+      console.error('Invalid list or tasks array:', list);
+      return;
+    }
+
+    list.tasks.splice(cardIndex, 1);
+
+    console.log('Service deleted card', this.boards[bIndex]);
+    console.log('list', list);
+    // Emit the updated boards array to subscribers
+    this.boardsChanged.next(this.boards.slice());
+  }
 }
