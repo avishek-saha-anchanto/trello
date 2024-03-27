@@ -21,9 +21,9 @@ import { BoardResolver } from './service/board-resolver';
 
 
 const appRoutes:Routes=[
-  {path:'',component: HomeComponent, pathMatch: 'full',resolve:[BoardResolver]},
+  {path:'',component: HomeComponent, pathMatch: 'full'},
   {path: 'boardform',component:BoardformComponent},
-  {path: 'board/:id', component: BoardComponent,children:[
+  {path: 'board/:id', component: BoardComponent,resolve:[BoardResolver],children:[
     { path: 'detail/:id/:id', component: CardDetailsComponent}
   ] },
 

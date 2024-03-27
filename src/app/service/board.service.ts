@@ -3,7 +3,7 @@ import { Board } from '../board.model';
 import { List } from '../list.model';
 import { Card } from '../card.model';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { FirebaseService } from './firebase.service';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class BoardService {
   boards: Board[] = [];
   boardsChanged = new Subject<Board[]>();
  
-
+  constructor(private firebaseService:FirebaseService){}
   setBoards(boards: Board[]) {
     this.boards = boards;
   }
@@ -21,11 +21,20 @@ export class BoardService {
     return this.boards;
   }
 
-  addList(newList: List, boardIndex: number) {
-    console.log("addlist");
+  addList(newList: List, boardIndex: number,key:string) {
+    
     this.boards[boardIndex].lists.push(newList);
     this.boardsChanged.next(this.boards.slice());
-   // this.firebaseService.postList(this.boards[boardIndex].key,newList);
+    this.firebaseService.postList(key, newList).subscribe(
+      response => {
+       
+       
+      },
+      error => {
+        console.error('Error adding list:', error);
+        
+      }
+    );
   }
 
   addCardToList(listIndex: number, card: Card, boardIndex: number) {
@@ -63,10 +72,13 @@ export class BoardService {
       board.lists[listIndex].tasks
     ) {
       const card = board.lists[listIndex].tasks[index];
-      console.log(card.name);
+      
       if (card) {
         card.name = newName;
         card.description = description;
+        card.updatedAt=new Date();
+        
+
       } else {
         console.error(
           `Card not found at index ${index} in list ${listIndex} of board ${boardIndex}`
@@ -80,10 +92,25 @@ export class BoardService {
     this.boardsChanged.next(this.boards.slice());
   }
 
-  addCardOnBoard(cardTitle: string, listIndex: number, boardIndex: number) {
-    this.boards[boardIndex].lists[listIndex].tasks.push(
-      new Card(cardTitle, '')
-    );
+   
+
+  addCardOnBoard(cardTitle: string, listIndex: number, boardIndex: number, key: string) {
+    const newCard: Card = { name: cardTitle, description: '' }; 
+    newCard.createdAt = new Date();
+    console.log(newCard)
+    this.boards[boardIndex].lists[listIndex].tasks.push(newCard);
     this.boardsChanged.next(this.boards.slice());
+    
+  
+    
   }
+
+  deleteList(listIndex:number,bindex:number)
+  {
+    this.boards[bindex].lists.splice(listIndex,1)
+    this.boardsChanged.next(this.boards.slice());
+    
+
+  }
+  
 }

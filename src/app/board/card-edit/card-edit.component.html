@@ -24,6 +24,13 @@
         placeholder="Description"
       ></textarea>
     </div>
+    <div *ngIf="card.updatedAt">
+      <p>Updated at: {{card.updatedAt}}</p>
+    </div>
+    <div *ngIf="!card.updatedAt">
+      <p>Created at: {{card.createdAt}}</p>
+    </div>
+
     <div class="button-container">
       <button class="btn btn-danger" (click)="closeModal()">Close</button>
       <button class="btn btn-success"  [disabled]="!newTitle.trim()" (click)="onSave()">Save</button>

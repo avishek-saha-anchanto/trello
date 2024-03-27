@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, catchError, map, mergeMap, of, throwError } from 'rxjs';
 import { Board } from '../board.model';
 import { List } from '../list.model';
 import { Card } from '../card.model';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseService {
   constructor(private http: HttpClient) {}
+
+  boardKey:string
 
   // Function to fetch data from Firebase
   fetchData(): Observable<any> {
@@ -71,12 +74,13 @@ export class FirebaseService {
         })
       );
   }
-  updateData(board: Board) {
-    console.log(board);
-    return this.http.put(
-      `https://trelloclone-219b5-default-rtdb.firebaseio.com/${board.key}.json`,
-      board
-    );
+  updateData(board: any) {
+    this.boardKey=board.key
+    console.log(board)
+    return this.http.put(`https://trelloclone-219b5-default-rtdb.firebaseio.com/${this.boardKey}.json`, board).subscribe(res=>{
+      console.log(res)
+    });
+      
   }
   fetchBoard(boardKey: string): Observable<Board> {
     return this.http.get<any>(`https://trelloclone-219b5-default-rtdb.firebaseio.com/${boardKey}.json`);
@@ -99,4 +103,22 @@ export class FirebaseService {
       })
     );
   }
+
+  addCard(boardKey: string, listIndex: number, card: Card): Observable<any> {
+    return this.fetchBoard(boardKey).pipe(
+      mergeMap((board: Board) => {
+        
+        if (listIndex < 0 || listIndex >= board.lists.length) {
+          return throwError('Invalid list index');
+        }
+  
+        board.lists[listIndex].tasks = board.lists[listIndex].tasks ? board.lists[listIndex].tasks : [];
+        board.lists[listIndex].tasks.push(card);
+  
+        
+        return this.updateBoard(boardKey, board);
+      })
+    );
+  }
+
 }

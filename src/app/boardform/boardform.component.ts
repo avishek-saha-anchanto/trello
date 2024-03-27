@@ -48,7 +48,11 @@ export class BoardformComponent {
     return this.fb.group({
       name: ['', Validators.required],
       description: [''],
+      createdAt:new Date(),
+      
     });
+
+    console.log(name)
   }
 
   addList() {

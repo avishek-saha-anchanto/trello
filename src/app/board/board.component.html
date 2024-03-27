@@ -109,6 +109,7 @@
           cdkDrag
         >
           <div class="list-title">{{ list?.name | uppercase }}</div>
+          <button class="btn btn-danger" (click)="deleteList(listIndex)">Delete</button>
           <div
             class="tasks-container"
             cdkDropList
