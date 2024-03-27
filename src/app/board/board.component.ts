@@ -123,7 +123,7 @@ showBoards(){
 saveChanges()
 {
   this.boardService.setBoards(this.boards);
-  this.firebaseService.postData(this.board);
+  this.firebaseService.updateData(this.board);
 }
 
 }

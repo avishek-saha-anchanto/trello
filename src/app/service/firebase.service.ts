@@ -34,34 +34,6 @@ export class FirebaseService {
   }
 
   fetchBoards(): Observable<Board[]> {
-    //     this.http.delete('https://trelloclone-219b5-default-rtdb.firebaseio.com/.json').subscribe(res => {
-    //   console.log("deleted");
-    // });
-    // const dummyData: Board[] = [
-    //   new Board('Board 1', [
-    //     new List('List 1', [
-    //       new Card('Card 1', 'Description 1'),
-    //       new Card('Card 2', 'Description 2')
-    //     ]),
-    //     new List('List 2', [
-    //       new Card('Card 3', 'Description 3'),
-    //       new Card('Card 4', 'Description 4')
-    //     ])
-    //   ]),
-    //   new Board('Board 2', [
-    //     new List('List A', [
-    //       new Card('Card A', 'Description A'),
-    //       new Card('Card B', 'Description B')
-    //     ]),
-    //     new List('List B', [
-    //       new Card('Card X', 'Description X'),
-    //       new Card('Card Y', 'Description Y'),
-    //       new Card('Card Z', 'Description Z')
-    //     ])
-    //   ]),
-    // ]; 
-    // return of(dummyData);
-   
     return this.http.get<any>( 'https://trelloclone-219b5-default-rtdb.firebaseio.com/.json').pipe(
       map(data => {
         const boards: Board[] = [];
@@ -85,11 +57,16 @@ export class FirebaseService {
             boards.push({
               name: boardData.name,
               lists: lists,
+              key:key
             });
           }
         }
         return boards;
       })
     );
+  }
+  updateData(board:Board){
+    console.log(board)
+    return this.http.put(`https://trelloclone-219b5-default-rtdb.firebaseio.com/${board.key}.json`, board);
   }
 }
