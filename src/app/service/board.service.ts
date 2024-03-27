@@ -12,7 +12,6 @@ import { FirebaseService } from './firebase.service';
 export class BoardService {
   boards: Board[] = [];
   boardsChanged = new Subject<Board[]>();
- 
 
   setBoards(boards: Board[]) {
     this.boards = boards;
@@ -22,10 +21,10 @@ export class BoardService {
   }
 
   addList(newList: List, boardIndex: number) {
-    console.log("addlist");
+    console.log('addlist');
     this.boards[boardIndex].lists.push(newList);
     this.boardsChanged.next(this.boards.slice());
-   // this.firebaseService.postList(this.boards[boardIndex].key,newList);
+    // this.firebaseService.postList(this.boards[boardIndex].key,newList);
   }
 
   addCardToList(listIndex: number, card: Card, boardIndex: number) {
@@ -33,11 +32,10 @@ export class BoardService {
     this.boards[boardIndex].lists[listIndex].tasks.push(card);
     this.boardsChanged.next(this.boards.slice());
   }
-  
+
   addBoard(newBoard: Board) {
     this.boards.push(newBoard);
     this.boardsChanged.next(this.boards.slice());
-
   }
 
   clearBoard() {
@@ -84,6 +82,26 @@ export class BoardService {
     this.boards[boardIndex].lists[listIndex].tasks.push(
       new Card(cardTitle, '')
     );
+    this.boardsChanged.next(this.boards.slice());
+  }
+  deleteCard(cardIndex: number, listIndex: number, bIndex: number) {
+    console.log('Service Delete Card', cardIndex, listIndex, bIndex);
+
+    const board = this.boards[bIndex];
+    console.log(board);
+    const list = board[listIndex];
+    console.log(list);
+
+    if (!list || !list.tasks || !Array.isArray(list.tasks)) {
+      console.error('Invalid list or tasks array:', list);
+      return;
+    }
+
+    list.tasks.splice(cardIndex, 1);
+
+    console.log('Service deleted card', this.boards[bIndex]);
+    console.log('list', list);
+    // Emit the updated boards array to subscribers
     this.boardsChanged.next(this.boards.slice());
   }
 }

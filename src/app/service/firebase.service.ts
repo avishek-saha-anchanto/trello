@@ -72,11 +72,11 @@ export class FirebaseService {
       );
   }
   updateData(board: Board) {
-    console.log(board);
+    //console.log("firebaseUpdate",board);
     return this.http.put(
       `https://trelloclone-219b5-default-rtdb.firebaseio.com/${board.key}.json`,
       board
-    );
+    ).subscribe(res=>console.log(res));
   }
   fetchBoard(boardKey: string): Observable<Board> {
     return this.http.get<any>(`https://trelloclone-219b5-default-rtdb.firebaseio.com/${boardKey}.json`);

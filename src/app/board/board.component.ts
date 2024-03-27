@@ -128,7 +128,7 @@ showBoards(){
 
 saveChanges()
 {
-  this.boardService.setBoards(this.boards);
+  //this.boardService.setBoards(this.boards);
   this.firebaseService.updateData(this.board);
 }
 

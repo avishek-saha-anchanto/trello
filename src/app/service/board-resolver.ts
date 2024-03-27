@@ -20,8 +20,8 @@ export class BoardResolver implements Resolve<any> {
   ) {}
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     // this.boards=this.boardService.getBoards();
-     if(this.boards!==undefined)
-     return null;
+    //  if(this.boards!==undefined)
+    //  return null;
 
     this.firebaseService.fetchBoards().subscribe({
       next: (res: Board[]) => {
