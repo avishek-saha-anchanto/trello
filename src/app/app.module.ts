@@ -11,19 +11,20 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { CardComponent } from './board/card/card.component';
 import { BoardformComponent } from './boardform/boardform.component';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home-component/home-component.component';
 import { CardDetailsComponent } from './board/card-details/card-details.component';
-import path from 'path';
 import { CardEditComponent } from './board/card-edit/card-edit.component';
+import { BoardResolver } from './service/board-resolver';
+import { CardDeleteComponent } from './board/card-delete/card-delete.component';
 
 
 
 const appRoutes:Routes=[
+  {path:'',component: HomeComponent, pathMatch: 'full'},
   {path: 'boardform',component:BoardformComponent},
-  {path:'',component: HomeComponent},
-  {path: 'board/:id', component: BoardComponent,children:[
+  {path: 'board/:id', component: BoardComponent,resolve:[BoardResolver],children:[
     { path: 'detail/:id/:id', component: CardDetailsComponent}
   ] },
 
@@ -38,10 +39,11 @@ const appRoutes:Routes=[
     BoardformComponent,
     HomeComponent,
     CardDetailsComponent,
-    CardEditComponent
+    CardEditComponent,
+    CardDeleteComponent
   ],
   imports: [
-    BrowserModule,DragDropModule,RouterModule.forRoot(appRoutes),FormsModule,HttpClientModule
+    BrowserModule,DragDropModule,RouterModule.forRoot(appRoutes),FormsModule,HttpClientModule,ReactiveFormsModule
   ],
   providers: [provideClientHydration(), provideAnimationsAsync()],
   bootstrap: [AppComponent],

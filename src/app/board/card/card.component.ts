@@ -16,6 +16,7 @@ export class CardComponent implements OnInit {
   bindex: number;
   isModal:boolean=false;
   isModalEdit:boolean=false;
+  isModalDelete:boolean=false;
 
   newTitle: string = '';
   description: string = '';
@@ -38,20 +39,14 @@ export class CardComponent implements OnInit {
   openModalCardDetail() {
     this.isModal=!this.isModal;
     // this.router.navigate(['detail', this.listName, this.index], {
-    //   relativeTo: this.route,
-    // });
-    console.log(this.card);
-  }
+      //   relativeTo: this.route,
+      // });
+      console.log(this.card);
+    }
+    openModalCardDelete() {
+      this.isModalDelete=!this.isModalDelete;
+    }
   
-  onSave() {
-    this.boardService.editCardName(
-      this.index,
-      this.newTitle,
-      this.listIndex,
-      this.bindex,
-      this.description
-    );
-    console.log(this.listName);
-    console.log(this.index);
-  }
+  
+  
 }

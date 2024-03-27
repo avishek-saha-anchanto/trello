@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BoardService } from '../../service/board.service';
 import { ActivatedRoute } from '@angular/router';
+import { Card } from '../../card.model';
 
 @Component({
   selector: 'app-card-edit',
@@ -12,6 +13,7 @@ export class CardEditComponent implements OnInit {
   @Input() index: number;
   @Input() listName: string;
   @Input() listIndex: number;
+  @Input() card:Card;
   bindex: number;
 
   newTitle: string = '';
@@ -26,6 +28,9 @@ export class CardEditComponent implements OnInit {
       const boardIndex = +params['id'];
       this.bindex = boardIndex;
     });
+
+    console.log(this.card.createdAt)
+    
   }
   closeModal() {
     this.isModalEdit = false;
@@ -48,8 +53,12 @@ export class CardEditComponent implements OnInit {
       this.bindex,
       this.description
     );
+
+    
+    
     this.closeModal();
     this.newTitle = '';
     this.description = '';
+
   }
 }
