@@ -89,7 +89,7 @@ export class BoardService {
 
     const board = this.boards[bIndex];
     console.log(board);
-    const list = board[listIndex];
+    const list = board.lists[listIndex];
     console.log(list);
 
     if (!list || !list.tasks || !Array.isArray(list.tasks)) {
