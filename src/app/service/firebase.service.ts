@@ -34,39 +34,48 @@ export class FirebaseService {
   }
 
   fetchBoards(): Observable<Board[]> {
-    return this.http.get<any>( 'https://trelloclone-219b5-default-rtdb.firebaseio.com/.json').pipe(
-      map(data => {
-        const boards: Board[] = [];
-        for (const key in data) {
-          if (data.hasOwnProperty(key)) {
-            const boardData = data[key];
-            const lists: List[] = [];
-            for (const listData of boardData.lists) {
-              const tasks: Card[] = [];
-              for (const taskData of listData.tasks) {
-                tasks.push({
-                  name: taskData.name,
-                  description: taskData.description
-                });
+    return this.http
+      .get<any>('https://trelloclone-219b5-default-rtdb.firebaseio.com/.json')
+      .pipe(
+        map((data) => {
+          const boards: Board[] = [];
+          for (const key in data) {
+            if (data.hasOwnProperty(key)) {
+              const boardData = data[key];
+              const lists: List[] = [];
+              if (Array.isArray(boardData.lists)) {
+                for (const listData of boardData.lists) {
+                  const tasks: Card[] = [];
+                  if (listData.tasks && Array.isArray(listData.tasks)) {
+                    for (const taskData of listData.tasks) {
+                      tasks.push({
+                        name: taskData.name,
+                        description: taskData.description,
+                      });
+                    }
+                  }
+                  lists.push({
+                    name: listData.name,
+                    tasks: tasks,
+                  });
+                }
               }
-              lists.push({
-                name: listData.name,
-                tasks: tasks
+              boards.push({
+                name: boardData.name,
+                lists: lists,
+                key: key,
               });
             }
-            boards.push({
-              name: boardData.name,
-              lists: lists,
-              key:key
-            });
           }
-        }
-        return boards;
-      })
-    );
+          return boards;
+        })
+      );
   }
-  updateData(board:Board){
-    console.log(board)
-    return this.http.put(`https://trelloclone-219b5-default-rtdb.firebaseio.com/${board.key}.json`, board);
+  updateData(board: Board) {
+    console.log(board);
+    return this.http.put(
+      `https://trelloclone-219b5-default-rtdb.firebaseio.com/${board.key}.json`,
+      board
+    );
   }
 }

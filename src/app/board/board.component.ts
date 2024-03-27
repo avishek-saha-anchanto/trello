@@ -62,16 +62,20 @@ export class BoardComponent implements OnInit {
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      this.boardService.setBoards(this.boards);
     } else {
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex);
+        this.boardService.setBoards(this.boards);
     }
     
   }
   drop2(event: CdkDragDrop<string[]>,lists:List[]) {
     moveItemInArray(lists, event.previousIndex, event.currentIndex);
+    this.boardService.setBoards(this.boards);
+
   }
 
   openBoardFormDialog(): void {
