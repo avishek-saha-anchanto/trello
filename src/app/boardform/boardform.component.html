@@ -1,10 +1,10 @@
 <div class="popup">
   <div class="popup-content">
     <div>
-      <h2>Create Board</h2>
+      <h2 class="white">Create Board</h2>
       <form [formGroup]="boardForm" (ngSubmit)="onSubmit()">
         <div>
-          <label for="name">Board Name:</label>
+          <label class="white" for="name">Board Name:</label>
           <input type="text" id="name" formControlName="name" />
           <!-- <div
             *ngIf="
@@ -16,72 +16,46 @@
           </div> -->
         </div>
 
-        <div style="margin-left: 10px" formArrayName="lists">
-          <div
-            *ngFor="let list of getControls(); let listIndex = index"
-            [formGroupName]="listIndex"
-          >
-            <label for="listName{{ listIndex }}">List Name:</label>
-            <input
-              type="text"
-              id="listName{{ listIndex }}"
-              formControlName="name"
-            />
-            <div
-              *ngIf="list.get('name').invalid && list.get('name').touched"
-              class="error"
-            >
+        <div class="list-container" formArrayName="lists">
+          <div *ngFor="let list of getControls(); let listIndex = index" [formGroupName]="listIndex" class="list-item">
+            <label class="white" for="listName{{ listIndex }}">List Name:</label>
+            <input type="text" id="listName{{ listIndex }}" formControlName="name" />
+            <div *ngIf="list.get('name').invalid && list.get('name').touched" class="error white">
               List name is required.
             </div>
 
-            <div style="margin-left: 30px" formArrayName="tasks">
-              <div
-                *ngFor="
-                  let task of list.get('tasks').controls;
-                  let taskIndex = index
-                "
-                [formGroupName]="taskIndex"
-              >
-                <label for="taskName{{ listIndex }}-{{ taskIndex }}"
-                  >Task Name:</label
-                >
-                <input
-                  type="text"
-                  id="taskName{{ listIndex }}-{{ taskIndex }}"
-                  formControlName="name"
-                />
-                <div
-                  *ngIf="task.get('name').invalid && task.get('name').touched"
-                  class="error"
-                >
-                  Task name is required.
-                </div>
+            <div class="task-container" formArrayName="tasks">
+              <div *ngFor="let task of list.get('tasks').controls; let taskIndex = index" [formGroupName]="taskIndex" class="task-row">
+                <div class="task-inputs">
+                  <label class="white" for="taskName{{ listIndex }}-{{ taskIndex }}">Task Name:</label>
+                  <input type="text" id="taskName{{ listIndex }}-{{ taskIndex }}" formControlName="name" />
+                  <div *ngIf="task.get('name').invalid && task.get('name').touched" class="error white">
+                    Task name is required.
+                  </div>
 
-                <label for="taskDescription{{ listIndex }}-{{ taskIndex }}"
-                  >Task Description:</label
-                >
-                <textarea
-                  id="taskDescription{{ listIndex }}-{{ taskIndex }}"
-                  formControlName="description"
-                ></textarea>
-                <button
-                  type="button"
-                  (click)="removeTask(listIndex, taskIndex)"
-                >
-                  Remove Task
-                </button>
+                  <label class="white" for="taskDescription{{ listIndex }}-{{ taskIndex }}">Task Description:</label>
+                  <textarea id="taskDescription{{ listIndex }}-{{ taskIndex }}" formControlName="description"></textarea>
+                </div>
+                <div class="task-buttons">
+                  <button type="button" class="button-add" (click)="addTask(listIndex)">Add Task</button>
+                  <button type="button" class="button-rm" (click)="removeTask(listIndex, taskIndex)">Remove Task</button>
+                </div>
               </div>
             </div>
-            <button type="button" (click)="addTask(listIndex)">Add Task</button>
-
-            <button type="button" (click)="removeList(listIndex)">
-              Remove List
-            </button>
+            <div class="list-buttons">
+              <button type="button" class="button-add" (click)="addList()">Add List</button>
+              <button type="button" class="button-rm" (click)="removeList(listIndex)">Remove List</button>
+            </div>
           </div>
         </div>
 
-        <button type="button" (click)="addList()">Add List</button>
-        <button type="submit">Submit</button>
+        <div class="final-button">
+          <button type="submit" class="submit-button">Submit</button>
+          <button type="cancel" class="cancel-button"(click)="onCancel()">Cancel</button>
+        </div>
+        
+          
+        
       </form>
     </div>
   </div>

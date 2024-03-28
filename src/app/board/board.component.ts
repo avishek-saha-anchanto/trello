@@ -31,6 +31,7 @@ export class BoardComponent implements OnInit {
   addingToListIndex: number = -1;
   inputFieldValue: string = '';
   showModal: boolean=false;
+  popupVisible: boolean = false;
   dialogRef: MatDialogRef<BoardformComponent> | undefined;
 
   constructor(private boardService: BoardService, public dialog1: MatDialog, private dialog: MatDialog,private http:HttpClient,private route:ActivatedRoute,private firebaseService:FirebaseService) {}
@@ -54,6 +55,17 @@ export class BoardComponent implements OnInit {
    
     
   }
+
+  
+
+  showPopup(): void {
+    this.popupVisible = true;
+  }
+
+  closePopup(): void {
+    this.popupVisible = false;
+  }
+
 
   addListToLists(newListTitle: string) {
     console.log(this.boards)
@@ -146,6 +158,8 @@ showBoards(){
 
 saveChanges()
 {
+  this.showPopup();
+  console.log(this.popupVisible)
   //this.boardService.setBoards(this.boards);
   this.firebaseService.updateData(this.board);
   console.log(this.boards)

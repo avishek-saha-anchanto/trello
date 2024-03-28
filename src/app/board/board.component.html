@@ -108,8 +108,10 @@
           *ngFor="let list of board?.lists; let listIndex = index"
           cdkDrag
         >
-          <div class="list-title">{{ list?.name | uppercase }}</div>
-          <button class="btn btn-danger" (click)="deleteList(listIndex)">Delete</button>
+          <div class="list-title">{{ list?.name | uppercase }}
+            <button class="btn btn-danger" (click)="deleteList(listIndex)">Delete List</button>
+          </div>
+          
           <div
             class="tasks-container"
             cdkDropList
@@ -171,7 +173,18 @@
       </div>
     </div>
   </div>
-  <button class="btn btn-success mx-auto my-10" (click)="saveChanges()" style="width: 50%">
-    Save Changes
-  </button>
+  <div class="gap d-flex justify-content-center">
+    <button class="btn btn-success my-10 save-changes" (click)="saveChanges()" style="width: 50%">
+      Save Changes
+    </button>
+  </div>
+
+  <div *ngIf="popupVisible" class="popup">
+    <div class="popup-content">
+      <h2>Changes Saved</h2>
+      <p>Your changes have been successfully saved.</p>
+      <button class="btn btn-primary" (click)="closePopup()">OK</button>
+    </div>
+  </div>
+  
 </div>

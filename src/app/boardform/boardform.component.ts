@@ -88,6 +88,10 @@ export class BoardformComponent {
     this.dialogRef.close();
   }
 
+  onCancel(){
+    this.dialogRef.close();
+  }
+
   getControls(): any[] {
     return (this.boardForm.get('lists') as FormArray).controls;
   }

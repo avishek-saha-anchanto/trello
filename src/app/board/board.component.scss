@@ -70,12 +70,10 @@
   background-color: #34495e;
   color: #ffffff;
   display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  flex-basis: 0;
-  min-width: 300px;
-  margin: 15px;
+  justify-content: space-between;
+  align-items: center;
   padding: 20px;
+  margin: 15px;
   border-radius: 20px;
   text-align: center;
 
@@ -85,6 +83,16 @@
     font-family: "Lato", sans-serif;
     text-transform: uppercase;
     margin-bottom: 20px;
+  }
+
+  .btn-danger {
+    background-color: red; /* Set the background color of the delete button */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 12px;
+    padding: 5px 10px;
+    cursor: pointer;
   }
 }
 .tasks-container {
@@ -182,3 +190,54 @@
   color: black;
   font-size: 10px;
 }
+
+.final-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.save-changes {
+  width: 200px; /* Adjust the width as needed */
+}
+
+
+
+
+
+.gap {
+  margin-top: 20px; /* Add any additional margin as needed */
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content {
+  text-align: center;
+}
+
+.popup button {
+  margin-top: 10px;
+}
+
+
+
+
+
