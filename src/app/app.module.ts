@@ -19,17 +19,19 @@ import { CardEditComponent } from './board/card-edit/card-edit.component';
 import { BoardResolver } from './service/board-resolver';
 import { CardDeleteComponent } from './board/card-delete/card-delete.component';
 
-
-
-const appRoutes:Routes=[
-  {path:'',component: HomeComponent, pathMatch: 'full'},
-  {path: 'boardform',component:BoardformComponent},
-  {path: 'board/:id', component: BoardComponent,resolve:[BoardResolver],children:[
-    { path: 'detail/:id/:id', component: CardDetailsComponent}
-  ] },
-
-
-]
+const appRoutes: Routes = [
+  {
+    path: '',
+    component: HomeComponent,
+    resolve: [BoardResolver],
+    pathMatch: 'full',
+  },
+  {
+    path: 'board/:id',
+    component: BoardComponent,
+    resolve: [BoardResolver],
+  },
+];
 
 @NgModule({
   declarations: [
@@ -40,10 +42,15 @@ const appRoutes:Routes=[
     HomeComponent,
     CardDetailsComponent,
     CardEditComponent,
-    CardDeleteComponent
+    CardDeleteComponent,
   ],
   imports: [
-    BrowserModule,DragDropModule,RouterModule.forRoot(appRoutes),FormsModule,HttpClientModule,ReactiveFormsModule
+    BrowserModule,
+    DragDropModule,
+    RouterModule.forRoot(appRoutes),
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [provideClientHydration(), provideAnimationsAsync()],
   bootstrap: [AppComponent],

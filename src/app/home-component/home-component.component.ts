@@ -1,26 +1,15 @@
 import {
   Component,
   ElementRef,
-  OnInit,
   ViewChild,
-  ChangeDetectorRef,
 } from '@angular/core';
 import { Board } from '../board.model';
 import { List } from '../list.model';
 import { BoardService } from '../service/board.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { BoardformComponent } from '../boardform/boardform.component';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
-import { HttpClient } from '@angular/common/http';
 import { Card } from '../card.model';
-import { Subscription, map } from 'rxjs';
-import { response } from 'express';
-import { FirebaseService } from '../service/firebase.service';
-import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home-component',
@@ -45,19 +34,12 @@ export class HomeComponent {
   constructor(
     private boardService: BoardService,
     public dialog1: MatDialog,
-    private dialog: MatDialog,
-    private http: HttpClient,
-    private cdr: ChangeDetectorRef,
-    private firebaseService: FirebaseService,
-    private router: Router
   ) {
-    // this.fetchDataFromFirebase();
   }
 
   ngOnInit() {
-    // this.fetchDataFromFirebase();
     this.boards = this.boardService.getBoards();
-    console.log(this.boards);
+    console.log("home component",this.boards);
     this.boardSubcription = this.boardService.boardsChanged.subscribe(
       (boards: Board[]) => {
         this.boards = boards;
@@ -95,7 +77,10 @@ export class HomeComponent {
 
   // Function to toggle the visibility of boards
   showBoards() {
-    console.log(this.boards);
+    // this.firebaseService.fetchBoards().subscribe(res=>{
+    //   this.boards=res;
+    // })
+    console.log("show board:home ",this.boards);
     this.showBoardsFlag = !this.showBoardsFlag;
   }
 

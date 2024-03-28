@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild ,ChangeDetectorRef} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Board } from '../board.model';
 import { List } from '../list.model';
 import { BoardService } from '../service/board.service';
@@ -7,11 +7,8 @@ import { BoardformComponent } from '../boardform/boardform.component';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { HttpClient } from '@angular/common/http';
 import { Card } from '../card.model';
-import { map } from 'rxjs';
-import { response } from 'express';
 import { ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '../service/firebase.service';
-import { Observable,of } from 'rxjs';
 
 
 
@@ -66,19 +63,19 @@ export class BoardComponent implements OnInit {
     newList.tasks=[];
     this.boardService.addList(newList,this.bindex,this.key);
     this.newListTitle='';
-    this.fetchDataFromFirebase();
+   // this.fetchDataFromFirebase();
     
     
 
   }
 
-  fetchDataFromFirebase() {
-    this.firebaseService.fetchBoards().subscribe(res=>{
-      console.log(res);
-      this.boards=res;
-      console.log(this.boards)
-    });
-  }
+  // fetchDataFromFirebase() {
+  //   this.firebaseService.fetchBoards().subscribe(res=>{
+  //     console.log(res);
+  //     this.boards=res;
+  //     console.log(this.boards)
+  //   });
+  // }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {

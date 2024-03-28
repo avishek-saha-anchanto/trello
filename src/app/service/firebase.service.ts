@@ -14,12 +14,6 @@ export class FirebaseService {
 
   boardKey:string
 
-  // Function to fetch data from Firebase
-  fetchData(): Observable<any> {
-    return this.http.get<any>(
-      'https://trelloclone-219b5-default-rtdb.firebaseio.com/.json'
-    );
-  }
 
   postData(board: Board) {
     //     this.http.delete('https://trelloclone-219b5-default-rtdb.firebaseio.com/.json').subscribe(res => {
@@ -82,43 +76,6 @@ export class FirebaseService {
     });
       
   }
-  fetchBoard(boardKey: string): Observable<Board> {
-    return this.http.get<any>(`https://trelloclone-219b5-default-rtdb.firebaseio.com/${boardKey}.json`);
-  }
-  updateBoard(boardKey: string, board: Board) {
-    console.log(board)
-    return this.http.put(`https://trelloclone-219b5-default-rtdb.firebaseio.com/${boardKey}.json`, board);
-  }
-  postList(boardKey: string, newList: List): Observable<any> {
-    return this.fetchBoard(boardKey).pipe(
-      mergeMap((board: Board) => {
-        newList.tasks=[];
-        
-        // Add the new list to the existing array of lists in the board
-        board.lists.push(newList);
-        
-
-        // Update the board data in Firebase with the modified lists array
-        return this.updateBoard(boardKey, board);
-      })
-    );
-  }
-
-  addCard(boardKey: string, listIndex: number, card: Card): Observable<any> {
-    return this.fetchBoard(boardKey).pipe(
-      mergeMap((board: Board) => {
-        
-        if (listIndex < 0 || listIndex >= board.lists.length) {
-          return throwError('Invalid list index');
-        }
   
-        board.lists[listIndex].tasks = board.lists[listIndex].tasks ? board.lists[listIndex].tasks : [];
-        board.lists[listIndex].tasks.push(card);
-  
-        
-        return this.updateBoard(boardKey, board);
-      })
-    );
-  }
 
 }
