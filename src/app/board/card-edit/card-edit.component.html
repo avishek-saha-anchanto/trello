@@ -5,6 +5,8 @@
 >
   <div class="modal-content" (click)="handleContentClick($event)">
     <div>
+      <h4>Title: {{card.name}}</h4>
+      <h4>Description: {{card.description}}</h4>
       <input
         type="text"
         name=""
@@ -13,7 +15,7 @@
         style="margin-bottom: 6px"
         [(ngModel)]="newTitle"
         required="required"
-        placeholder="Title"
+        placeholder="Enter new title"
       />
       <textarea
         name=""
