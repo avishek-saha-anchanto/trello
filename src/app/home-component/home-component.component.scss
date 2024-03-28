@@ -23,7 +23,6 @@
   }
   .offcanvas {
     width: 200px;
-    
   }
 }
 
@@ -34,4 +33,16 @@
   background-color: white;
   color: black;
   font-size: 10px;
+}
+a {
+  text-decoration: none;
+}
+.card {
+  height: 102px;
+  width: 250px;
+  color: white;
+  font-weight: 900;
+}
+.bg-pink {
+  background-color: #d72caf;
 }
