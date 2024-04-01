@@ -64,6 +64,7 @@ export class BoardService {
         card.name = newName;
         card.description = description;
         card.updatedAt = new Date();
+       // delete card.createdAt;
       } else {
         console.error(
           `Card not found at index ${index} in list ${listIndex} of board ${boardIndex}`

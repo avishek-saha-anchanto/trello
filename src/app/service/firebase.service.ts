@@ -48,6 +48,8 @@ export class FirebaseService {
                       tasks.push({
                         name: taskData.name,
                         description: taskData.description,
+                        createdAt: taskData.createdAt,
+                        updatedAt:taskData.updatedAt
                       });
                     }
                   }
